@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:fetin/views/widgets/cardWeight.dart';
 import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 
@@ -76,17 +77,29 @@ class _InsightsCowState extends State<InsightsCow> {
             delegate: SliverChildListDelegate(
               [
                 SizedBox(
-                  height: 700,
+                  height: 680,
                   child: Column(
                     children: [
                       Expanded(
-                          flex: 4,
-                          child: Container(
+                        flex: 4,
+                        child: Container(
                             margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
+                            alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 120, 144, 72),
                                 borderRadius: BorderRadius.circular(15)),
-                          )),
+                            child: Column(
+                              children: [
+                                CardThree(),
+                                CardThree(),
+                                CardThree(),
+                                CardThree(),
+                                CardThree(),
+                                CardThree(),
+                              ],
+                            )),
+                      ),
                       Expanded(
                         flex: 2,
                         child: Row(
@@ -116,18 +129,6 @@ class _InsightsCowState extends State<InsightsCow> {
                           ],
                         ),
                       ),
-                      Expanded(
-                          flex: 1,
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                  left: 10, right: 10, bottom: 10),
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 120, 144, 72),
-                                  borderRadius: BorderRadius.circular(15)),
-                            ),
-                          ))
                     ],
                   ),
                 )

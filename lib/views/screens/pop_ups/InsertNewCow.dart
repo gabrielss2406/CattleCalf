@@ -25,7 +25,7 @@ class _NewCowState extends State<NewCow> {
           title: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 96, 72, 72),
+                color: Colors.brown[800],
                 borderRadius: BorderRadius.circular(5)),
             alignment: Alignment.center,
             child: Text(
@@ -61,8 +61,7 @@ class _NewCowState extends State<NewCow> {
                 style: TextStyle(color: Colors.white),
               ),
               style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
-                      Color.fromARGB(255, 96, 72, 72))),
+                  backgroundColor: MaterialStatePropertyAll(Colors.brown[800])),
             ),
           ],
         );
