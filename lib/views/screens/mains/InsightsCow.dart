@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'package:fetin/views/screens/StartPage.dart';
+import 'package:fetin/views/screens/mains/StartPage.dart';
 import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 
@@ -21,7 +21,9 @@ class _InsightsCowState extends State<InsightsCow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        popUpPage: 2,
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(

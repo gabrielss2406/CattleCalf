@@ -1,8 +1,8 @@
-import 'package:fetin/views/screens/EconomyPage.dart';
-import 'package:fetin/views/screens/InsightsCow.dart';
+import 'package:fetin/views/screens/mains/EconomyPage.dart';
+import 'package:fetin/views/screens/mains/InsightsCow.dart';
 import 'package:fetin/views/screens/SplashScreen.dart';
-import 'package:fetin/views/screens/StartPage.dart';
-import 'package:fetin/views/screens/FilterPage.dart';
+import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:fetin/views/screens/mains/FilterPage.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
