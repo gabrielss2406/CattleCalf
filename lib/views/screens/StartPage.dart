@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field
+import 'package:fetin/models/AnnotationModel.dart';
+import 'package:fetin/database/services/testAnnotation.dart';
 import 'package:fetin/views/screens/NewCow.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 import 'package:fetin/views/widgets/navBar.dart';
 import 'package:fetin/views/widgets/cardCow.dart';
 import 'package:flutter/material.dart';
+
+import '../../database/liteConfig.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -14,6 +18,17 @@ class _StartPageState extends State<StartPage> {
   TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   bool _showNewCow = false;
+
+  // testes
+  void testfunc () async {
+    var annotation = Annotation(idAnnotation: null, annotation: "oi", date: "hoje", reminder: "lembre");
+    print(await (await getDatabase()).rawQuery("SELECT name FROM sqlite_master WHERE type='table';"));
+    //var a = await createAnnotation(annotation);
+    var b = await readAnnotation();
+    print("oi");
+    print(b);
+  }
+  //
 
   void _toggleNewCow() {
     setState(() {
@@ -33,6 +48,10 @@ class _StartPageState extends State<StartPage> {
       appBar: CustomAppBar(),
       body: Column(
         children: [
+          
+          ElevatedButton(onPressed:() {
+            testfunc();
+          }, child: null,),
           InkWell(
             onTap: () {},
             child: Container(
@@ -105,6 +124,8 @@ class _StartPageState extends State<StartPage> {
           ),
           if (_showNewCow) NewCow()
         ],
+
+
       ),
       bottomNavigationBar: NavBar(currentIndex: 0),
     );
