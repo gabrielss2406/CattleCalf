@@ -27,7 +27,9 @@ class _EconomyPageState extends State<EconomyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 240, 240, 216),
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        popUpPage: 1,
+      ),
       body: Container(
         padding: EdgeInsets.all(10),
         child: Column(children: [

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:fetin/views/screens/InsightsCow.dart';
+import 'package:fetin/views/screens/mains/InsightsCow.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/CattleModel.dart';
@@ -98,7 +98,7 @@ class _CardOneState extends State<CardOne> {
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 15, right: 15, bottom: 10),
-                                child: iconId("12")),
+                                child: iconId(widget.cattle.idCattle.toString())),
                           ],
                         )
                       ],

@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field
-import 'package:fetin/views/screens/NewCow.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 import 'package:fetin/views/widgets/navBar.dart';
 import 'package:fetin/views/widgets/cardCow.dart';
 import 'package:fetin/database/services/AuthServices.dart';
 import 'package:flutter/material.dart';
 
-import '../../database/services/CattleServices.dart';
-import '../../models/CattleModel.dart';
+import '../../../database/services/CattleServices.dart';
+import '../../../models/CattleModel.dart';
 
 
 class StartPage extends StatefulWidget {
@@ -64,7 +63,9 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        popUpPage: 0,
+      ),
       body: Column(
         children: [
           InkWell(
@@ -100,8 +101,7 @@ class _StartPageState extends State<StartPage> {
                           BorderSide(color: Color.fromARGB(255, 96, 72, 72)),
                     ),
                     hintStyle: TextStyle(
-                      color: Color.fromARGB(
-                          255, 120, 144, 72), // Cor do texto "Search"
+                      color: Color.fromARGB(255, 120, 144, 72),
                     ),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.6),
@@ -109,13 +109,12 @@ class _StartPageState extends State<StartPage> {
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(
                         color: Color.fromARGB(255, 120, 144, 72),
-                      ), // Cor da borda quando o campo não está em foco
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 96, 72,
-                              72)), // Cor da borda quando o campo está em foco
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 96, 72, 72)),
                     ),
                   ),
                 ),
@@ -137,7 +136,6 @@ class _StartPageState extends State<StartPage> {
               },
             ),
           ),
-          if (_showNewCow) NewCow()
         ],
 
 

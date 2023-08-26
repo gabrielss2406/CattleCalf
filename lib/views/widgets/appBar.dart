@@ -1,27 +1,37 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:fetin/views/screens/NewCow.dart';
+import 'package:fetin/views/screens/pop_ups/InsertNewCow.dart';
+import 'package:fetin/views/screens/pop_ups/InsertNewEconomy.dart';
+import 'package:fetin/views/screens/pop_ups/InsertNewInsight.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  CustomAppBar() : preferredSize = Size.fromHeight(kToolbarHeight);
+  const CustomAppBar({required this.popUpPage});
 
   @override
-  final Size preferredSize;
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  final int popUpPage;
 
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  void _openNewCowWidget(BuildContext context) {
+  void _openWidget(BuildContext context, int type) {
     showModalBottomSheet(
       context: context,
-      backgroundColor:
-          Colors.transparent, // Definindo o fundo como transparente
+      backgroundColor: Color.fromARGB(125, 0, 0, 0),
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return NewCow();
+        if (type == 0) {
+          return NewCow();
+        } else if (type == 1) {
+          return NewEconomy();
+        } else if (type == 2) {
+          return NewInsights();
+        } else {
+          return NewInsights();
+        }
       },
     );
   }
@@ -30,7 +40,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Color.fromARGB(255, 120, 144, 72),
-      centerTitle: true, // Centralizar o título
+      centerTitle: true,
       title: Image.asset(
         'assets/logo.png',
         width: 30,
@@ -41,7 +51,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           child: IconButton(
             icon: Icon(Icons.add),
             color: Colors.white,
-            onPressed: () => _openNewCowWidget(context),
+            onPressed: () => _openWidget(context, widget.popUpPage),
           ),
         )
       ],
