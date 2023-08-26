@@ -3,8 +3,12 @@
 import 'package:fetin/views/screens/InsightsCow.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/CattleModel.dart';
+
 class CardOne extends StatefulWidget {
-  const CardOne({Key? key});
+  final Cattle cattle; // Adicione essa propriedade
+
+  const CardOne({Key? key, required this.cattle}) : super(key: key);
 
   @override
   State<CardOne> createState() => _CardOneState();
@@ -76,14 +80,14 @@ class _CardOneState extends State<CardOne> {
                                     child: text(
                                         Colors.brown[800],
                                         Color.fromARGB(255, 192, 216, 96),
-                                        "Azuebuado")),
+                                        widget.cattle.breed)),
                                 Padding(
                                     padding: EdgeInsets.only(
                                         left: 10, right: 0, bottom: 10),
                                     child: text(
                                         Colors.brown[800],
                                         Color.fromARGB(255, 192, 216, 96),
-                                        "Touro")),
+                                        widget.cattle.birthDate)),
                               ],
                             ),
                           ),

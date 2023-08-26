@@ -1,13 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field
-import 'package:fetin/models/AnnotationModel.dart';
-import 'package:fetin/database/services/testAnnotation.dart';
 import 'package:fetin/views/screens/NewCow.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 import 'package:fetin/views/widgets/navBar.dart';
 import 'package:fetin/views/widgets/cardCow.dart';
+import 'package:fetin/database/services/AuthServices.dart';
 import 'package:flutter/material.dart';
 
-import '../../database/liteConfig.dart';
+import '../../database/services/CattleServices.dart';
+import '../../models/CattleModel.dart';
+
 
 class StartPage extends StatefulWidget {
   @override
@@ -15,20 +16,38 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
+  List<Cattle> cattleList = [];
   String _searchQuery = '';
   bool _showNewCow = false;
 
-  // testes
-  void testfunc () async {
-    var annotation = Annotation(idAnnotation: null, annotation: "oi", date: "hoje", reminder: "lembre");
-    print(await (await getDatabase()).rawQuery("SELECT name FROM sqlite_master WHERE type='table';"));
-    //var a = await createAnnotation(annotation);
-    var b = await readAnnotation();
-    print("oi");
-    print(b);
+
+  @override
+  initState() {
+    super.initState();
+    // Exec async funcions
+    WidgetsBinding.instance.addPostFrameCallback((_){
+
+      // TEMP CODE (Login) ================================
+      AuthServices.verifyLogged().then((value) {
+        if(value){
+          print("Já logado!!");
+          // Navigator
+        }
+        else{
+          print("Fazendo login...");
+          AuthServices.doLogin("02126632679", "senha123");
+        }
+      },
+      );
+      // ===================================================
+
+      CattleServices.getCattleListByUser().then((value) {
+        cattleList = value;
+        setState(() {});
+      });
+    });
   }
-  //
 
   void _toggleNewCow() {
     setState(() {
@@ -48,10 +67,6 @@ class _StartPageState extends State<StartPage> {
       appBar: CustomAppBar(),
       body: Column(
         children: [
-          
-          ElevatedButton(onPressed:() {
-            testfunc();
-          }, child: null,),
           InkWell(
             onTap: () {},
             child: Container(
@@ -109,7 +124,7 @@ class _StartPageState extends State<StartPage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 20,
+              itemCount: cattleList.length,
               itemBuilder: (context, index) {
                 EdgeInsets margin = index == 0
                     ? EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 5)
@@ -117,7 +132,7 @@ class _StartPageState extends State<StartPage> {
                 return Container(
                   height: 100,
                   margin: margin,
-                  child: const CardOne(),
+                  child: CardOne(cattle: cattleList[index]),
                 );
               },
             ),

@@ -1,5 +1,3 @@
-// Define a function that inserts dogs into the database
-import 'package:sqflite/sqflite.dart';
 
 import '../liteConfig.dart';
 import '../../models/AnnotationModel.dart';
