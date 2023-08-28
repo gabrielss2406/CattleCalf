@@ -21,4 +21,16 @@ class Weight{
   String toString() {
     return 'Weight{idWeight: $idWeight, weight: $weight, date: $date}';
   }
+
+  factory Weight.fromJson(Map<String, dynamic> json) {
+    return Weight(
+      idWeight: json['idWeight'],
+      weight: json['weight'],
+      date: json['date'],
+    );
+  }
+
+  static List<Weight> fromJsonList(List<Map<String, dynamic>> jsonList) {
+    return jsonList.map((json) => Weight.fromJson(json)).toList();
+  }
 }

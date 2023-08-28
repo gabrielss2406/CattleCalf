@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:fetin/database/services/WeightServices.dart';
 import 'package:fetin/models/CattleModel.dart';
+import 'package:fetin/models/WeightModel.dart';
 import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:fetin/views/screens/pop_ups/InsertNewWeight.dart';
 import 'package:fetin/views/widgets/cardWeight.dart';
 import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/appBar.dart';
@@ -15,17 +18,29 @@ class InsightsCow extends StatefulWidget {
 }
 
 class _InsightsCowState extends State<InsightsCow> {
+  List<Weight> weightList = [];
+
   @override
   initState() {
     super.initState();
     // Exec async funcions
     WidgetsBinding.instance.addPostFrameCallback((_){
-
-      //CattleServices.getCattleListByUser().then((value) {
-      //  cattleList = value;
-      //  setState(() {});
-      //});
+      WeightServices.getWeightList(widget.cattle.idCattle).then((value) {
+        weightList = value;
+        setState(() {});
+      },);
     });
+  }
+
+  void _openWidget(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Color.fromARGB(125, 0, 0, 0),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+          return NewWeight(idCattle: widget.cattle.idCattle);
+      },
+    );
   }
 
   void navigateToNewPage() {
@@ -107,12 +122,25 @@ class _InsightsCowState extends State<InsightsCow> {
                                 borderRadius: BorderRadius.circular(15)),
                             child: Column(
                               children: [
-                                CardThree(),
-                                CardThree(),
-                                CardThree(),
-                                CardThree(),
-                                CardThree(),
-                                CardThree(),
+                                Ink(
+                                  child: IconButton(
+                                    icon: Icon(Icons.add),
+                                    color: Colors.white,
+                                    onPressed: () => _openWidget(context),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListView.builder(
+                                  itemCount: weightList.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: EdgeInsets.all(0),
+                                      child: CardThree(weight: weightList[index],),
+                                    );
+                                  },
+                                ),
+                                ),
+                                
                               ],
                             )),
                       ),

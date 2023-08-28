@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:fetin/models/WeightModel.dart';
 import 'package:flutter/material.dart';
 
 class CardThree extends StatefulWidget {
-  const CardThree({Key? key});
+  final Weight weight; // Adicione essa propriedade
+
+  const CardThree({Key? key, required this.weight}) : super(key: key);
 
   @override
   State<CardThree> createState() => _CardThreeState();
@@ -25,7 +28,7 @@ class _CardThreeState extends State<CardThree> {
             const Color.fromARGB(255, 68, 49, 42),
             const Color.fromARGB(255, 68, 49, 42),
           ],
-          stops: [0.0, 0.54, 0.54, 1.0],
+          stops: [0.0, 0.44, 0.44, 1.0],
         ),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -33,14 +36,14 @@ class _CardThreeState extends State<CardThree> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            '20:23 - 03/06/2023 '.toUpperCase(),
+            widget.weight.date.toUpperCase(),
             style: TextStyle(
               fontSize: 18,
               color: Colors.brown[800],
             ),
           ),
           Text(
-            '250,00 KG'.toUpperCase(),
+            ('${widget.weight.weight} KG').toUpperCase(),
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,
