@@ -20,7 +20,7 @@ class _CardOneState extends State<CardOne> {
       context,
       MaterialPageRoute(
           builder: (context) =>
-              InsightsCow()), // Substitua NewPage pela página de destino
+              InsightsCow(cattle: widget.cattle)), // Substitua NewPage pela página de destino
     );
   }
 

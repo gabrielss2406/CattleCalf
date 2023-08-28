@@ -1,17 +1,33 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:fetin/models/CattleModel.dart';
 import 'package:fetin/views/screens/mains/StartPage.dart';
 import 'package:fetin/views/widgets/cardWeight.dart';
 import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 
 class InsightsCow extends StatefulWidget {
-  const InsightsCow({super.key});
+  final Cattle cattle; // Adicione essa propriedade
+
+  const InsightsCow({Key? key, required this.cattle}) : super(key: key);
 
   @override
   State<InsightsCow> createState() => _InsightsCowState();
 }
 
 class _InsightsCowState extends State<InsightsCow> {
+  @override
+  initState() {
+    super.initState();
+    // Exec async funcions
+    WidgetsBinding.instance.addPostFrameCallback((_){
+
+      //CattleServices.getCattleListByUser().then((value) {
+      //  cattleList = value;
+      //  setState(() {});
+      //});
+    });
+  }
+
   void navigateToNewPage() {
     Navigator.pushReplacement(
       context,
@@ -49,7 +65,7 @@ class _InsightsCowState extends State<InsightsCow> {
                       alignment: AlignmentDirectional.bottomEnd,
                       child: Container(
                         margin: EdgeInsets.all(20),
-                        child: iconId("33"),
+                        child: iconId(widget.cattle.idCattle.toString()),
                       )),
                   Padding(
                     padding: EdgeInsets.only(top: 15, left: 5),
@@ -68,7 +84,7 @@ class _InsightsCowState extends State<InsightsCow> {
               title: Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  'Azuebuado',
+                  widget.cattle.breed,
                 ),
               ),
             ),
@@ -124,7 +140,10 @@ class _InsightsCowState extends State<InsightsCow> {
                                   child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
-                                      children: [iconId("32"), iconId("24")]),
+                                      children: [
+                                        iconId("${widget.cattle.cattle_idCattle_sire}\nPai"),
+                                        iconId("${widget.cattle.cattle_idCattle_dam}\nMãe")
+                                      ]),
                                 ))
                           ],
                         ),
@@ -152,7 +171,10 @@ class _InsightsCowState extends State<InsightsCow> {
             child: Padding(
               padding: const EdgeInsets.only(top: 30),
               child: Text(
-                text,
+                textAlign: TextAlign.center, 
+                text.contains("null")
+                ? ""
+                : text,
                 style: const TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 15,

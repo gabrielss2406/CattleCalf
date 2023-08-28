@@ -15,7 +15,7 @@ Future<Database> getDatabase() async {
     onCreate: (db, version) async {
       // Executar o script de criação de tabelas
       print("Criando");
-      await db.execute(CREATE_TABLE_ADDRES);
+      await db.execute(CREATE_TABLE_ADDRESS);
       await db.execute(CREATE_TABLE_ANNOTATION);
       await db.execute(CREATE_TABLE_CATTLE);
       await db.execute(CREATE_TABLE_EXPENSE);
@@ -23,7 +23,8 @@ Future<Database> getDatabase() async {
       await db.execute(CREATE_TABLE_IMAGE);
       await db.execute(CREATE_TABLE_TYPE);
       await db.execute(CREATE_TABLE_USER);
-      await db.execute(CREATE_TABLE_WEIGHT);
+      await db.execute(CREATE_TABLE_WEIGHING);
+      await db.execute(CREATE_TYPES_REGISTERS);
     },
     version: 1,
   );

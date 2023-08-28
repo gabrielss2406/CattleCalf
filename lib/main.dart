@@ -1,5 +1,4 @@
 import 'package:fetin/views/screens/mains/EconomyPage.dart';
-import 'package:fetin/views/screens/mains/InsightsCow.dart';
 import 'package:fetin/views/screens/SplashScreen.dart';
 import 'package:fetin/views/screens/mains/StartPage.dart';
 import 'package:fetin/views/screens/mains/FilterPage.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/start': (context) => StartPage(),
         '/economy': (context) => EconomyPage(),
         '/filter': (context) => FilterPage(),
-        '/insights': (context) => InsightsCow(),
+        //'/insights': (context) => InsightsCow(),
       },
     );
   }

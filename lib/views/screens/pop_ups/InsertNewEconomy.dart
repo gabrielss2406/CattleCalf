@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+import 'package:fetin/database/services/EconomyServices.dart';
 import 'package:flutter/material.dart';
 
 class NewEconomy extends StatefulWidget {
@@ -9,6 +10,21 @@ class NewEconomy extends StatefulWidget {
 }
 
 class _NewEconomyState extends State<NewEconomy> {
+
+  Future<void> _sendNewEconomy(String type, String date, String value) async {
+
+    try {
+      await EconomyServices.createEconomy();
+    } catch (error) {
+      // Tratamento de erro
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Erro ao enviar o registro.'),
+        backgroundColor: Colors.red,
+      ));
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
@@ -46,6 +62,7 @@ class _NewEconomyState extends State<NewEconomy> {
           actions: [
             ElevatedButton(
               onPressed: () {
+                _sendNewEconomy("type", "date", "value");
                 Navigator.pop(context);
               },
               child: Text(

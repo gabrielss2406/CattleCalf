@@ -4,8 +4,8 @@ class Cattle{
   final int? idCattle;
   final String breed;
   final String birthDate;
-  final String? cattle_idCattle_sire;
-  final String? cattle_idCattle_dam;
+  final int? cattle_idCattle_sire;
+  final int? cattle_idCattle_dam;
   final String? weight_idWeight;
   final String? image_idImage;
   final String? annotation_idAnnotation;
