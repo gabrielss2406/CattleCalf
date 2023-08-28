@@ -11,10 +11,9 @@ class NewCow extends StatefulWidget {
 
 class _NewCowState extends State<NewCow> {
 
-  Future<void> _sendNewCow(String breed, String date, String idDad, String idMom) async {
-
+  Future<void> _sendNewCow(String? id,String breed, String date, String idDad, String idMom) async {
     try {
-      await CattleServices.createCattle(breed, date, idDad, idMom);
+      await CattleServices.createCattle(id, breed, date, int.tryParse(idDad), int.tryParse(idMom));
     } catch (error) {
       // Tratamento de erro
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -22,13 +21,13 @@ class _NewCowState extends State<NewCow> {
         backgroundColor: Colors.red,
       ));
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
+        final _id = TextEditingController();
         final _raca = TextEditingController();
         final _data = TextEditingController();
         final _idpai = TextEditingController();
@@ -54,6 +53,7 @@ class _NewCowState extends State<NewCow> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                textEntry(_id, 'Id (opcional)'),
                 textEntry(_raca, 'Raça'),
                 textEntry(_data, 'Data'),
                 textEntry(_idpai, 'ID Pai'),
@@ -65,7 +65,7 @@ class _NewCowState extends State<NewCow> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                _sendNewCow(_raca.text, _data.text, _idpai.text, _idmae.text);
+                _sendNewCow(_id.text, _raca.text, _data.text, _idpai.text, _idmae.text);
                 Navigator.pop(context);
               },
               child: Text(

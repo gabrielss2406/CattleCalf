@@ -1,15 +1,33 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:fetin/database/services/TypeServices.dart';
+import 'package:fetin/models/ExpenseModel.dart';
+import 'package:fetin/models/TypeModel.dart';
 import 'package:flutter/material.dart';
 
 class CardTwo extends StatefulWidget {
-  const CardTwo({Key? key});
+  final Expense expense; // Adicione essa propriedade
+
+  const CardTwo({Key? key, required this.expense}) : super(key: key);
 
   @override
   State<CardTwo> createState() => _CardTwoState();
 }
 
 class _CardTwoState extends State<CardTwo> {
+  Type? type;
+  
+  @override
+  initState() {
+    super.initState();
+
+    TypeServices.getTypeById(widget.expense.type_idType).then((value) {
+      print(value[0]);
+      type = value[0];
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,14 +69,14 @@ class _CardTwoState extends State<CardTwo> {
                                 child: text(
                                     Colors.brown[800],
                                     Color.fromARGB(255, 120, 144, 72),
-                                    "OTHERS")),
+                                    type?.name ?? '')),
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 10, right: 0, bottom: 10),
                                 child: text(
                                     Colors.brown[800],
                                     Color.fromARGB(255, 120, 144, 72),
-                                    "22/03/2023")),
+                                    widget.expense.date)),
                           ],
                         ),
                       ),
@@ -75,7 +93,7 @@ class _CardTwoState extends State<CardTwo> {
                       margin: EdgeInsets.only(left: 10),
                       alignment: AlignmentDirectional.center,
                       child: Text(
-                        "RS 450,00",
+                        "RS ${widget.expense.amount}",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,

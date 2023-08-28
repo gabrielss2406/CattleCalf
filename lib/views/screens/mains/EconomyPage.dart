@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:fetin/database/services/EconomyServices.dart';
+import 'package:fetin/models/ExpenseModel.dart';
 import 'package:fetin/views/widgets/cardEconomy.dart';
 import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/chart.dart';
@@ -13,6 +15,18 @@ class EconomyPage extends StatefulWidget {
 }
 
 class _EconomyPageState extends State<EconomyPage> {
+  List<Expense> expenseList = [];
+
+  @override
+  initState() {
+    super.initState();
+
+    EconomyServices.getExpenseListByUser().then((value) {
+      expenseList = value;
+      setState(() {});
+    });
+  }
+
   final List<EconomyData> data = [
     EconomyData('Vacune', 'Vacune', 100, Colors.pink),
     EconomyData('Portion', 'Portion', 50, Colors.red),
@@ -36,7 +50,7 @@ class _EconomyPageState extends State<EconomyPage> {
           chartData(data),
           Expanded(
             child: ListView.builder(
-              itemCount: 20,
+              itemCount: expenseList.length,
               itemBuilder: (context, index) {
                 EdgeInsets margin = index == 0
                     ? EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 5)
@@ -44,7 +58,7 @@ class _EconomyPageState extends State<EconomyPage> {
                 return Container(
                   height: 100,
                   margin: margin,
-                  child: CardTwo(),
+                  child: CardTwo(expense: expenseList[index],),
                 );
               },
             ),

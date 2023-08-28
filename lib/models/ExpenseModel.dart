@@ -1,8 +1,8 @@
 class Expense{
   final int? idExpense;
-  final String amount;
+  final double amount;
   final String date;
-  final String type_idType;
+  final int type_idType;
 
   const Expense({
     required this.idExpense,
@@ -24,4 +24,19 @@ class Expense{
   String toString() {
     return 'User{idExpense: $idExpense, amount: $amount, date: $date}';
   }
+
+  factory Expense.fromJson(Map<String, dynamic> json) {
+    return Expense(
+      idExpense: json['idExpense'],
+      amount: json['amount'],
+      date: json['date'],
+      type_idType: json['type_idType'],
+    );
+  }
+
+  static List<Expense> fromJsonList(List<Map<String, dynamic>> jsonList) {
+    return jsonList.map((json) => Expense.fromJson(json)).toList();
+  }
+
+  
 }

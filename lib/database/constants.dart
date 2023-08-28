@@ -106,9 +106,15 @@ CREATE TABLE IF NOT EXISTS expense (
   amount FLOAT NOT NULL,
   date DATE NOT NULL,
   type_idType INTEGER NOT NULL,
+  user_cpf VARCHAR(11) NOT NULL,
   CONSTRAINT fk_gasto_tipo
     FOREIGN KEY (type_idType)
     REFERENCES type (idType)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_gado_usuario1
+    FOREIGN KEY (user_cpf)
+    REFERENCES user (cpf)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );""";

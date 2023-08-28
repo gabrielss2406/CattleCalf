@@ -14,7 +14,7 @@ class _NewEconomyState extends State<NewEconomy> {
   Future<void> _sendNewEconomy(String type, String date, String value) async {
 
     try {
-      await EconomyServices.createEconomy();
+      await EconomyServices.createEconomy(double.tryParse(value) ?? 0.0, date);
     } catch (error) {
       // Tratamento de erro
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -62,7 +62,7 @@ class _NewEconomyState extends State<NewEconomy> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                _sendNewEconomy("type", "date", "value");
+                _sendNewEconomy(_tipo.text, _data.text, _valor.text);
                 Navigator.pop(context);
               },
               child: Text(
