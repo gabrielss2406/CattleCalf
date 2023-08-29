@@ -1,6 +1,6 @@
 class Type{
   final int? idType;
-  final String? name;
+  final String name;
 
   const Type({
     required this.idType,
@@ -16,7 +16,7 @@ class Type{
 
   @override
   String toString() {
-    return 'Image{idType: $idType, name: $name}';
+    return 'Type{idType: $idType, name: $name}';
   }
 
   factory Type.fromJson(Map<String, dynamic> json) {

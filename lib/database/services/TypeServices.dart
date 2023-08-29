@@ -16,4 +16,21 @@ class TypeServices{
     return Type.fromJsonList(preCattleList);
   }
 
+  static Future<List<Map<String, Object?>>> getTypeList() async {
+    Database database = await getDatabase();
+
+    String sql = """
+      SELECT t.name AS type_name, SUM(e.amount) AS total_expenses
+      FROM type t
+      LEFT JOIN expense e ON t.idType = e.type_idType
+      GROUP BY t.name
+      ORDER BY t.idType ASC
+    """;
+    var preCattleList = (await database.rawQuery(sql));
+
+    print(preCattleList);
+
+    return preCattleList;
+  }
+
 }

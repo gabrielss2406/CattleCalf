@@ -11,10 +11,10 @@ class NewEconomy extends StatefulWidget {
 
 class _NewEconomyState extends State<NewEconomy> {
 
-  Future<void> _sendNewEconomy(String type, String date, String value) async {
+  Future<void> _sendNewEconomy(int type, String date, String value) async {
 
     try {
-      await EconomyServices.createEconomy(double.tryParse(value) ?? 0.0, date);
+      await EconomyServices.createEconomy(double.tryParse(value) ?? 0.0, date, type);
     } catch (error) {
       // Tratamento de erro
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -62,7 +62,7 @@ class _NewEconomyState extends State<NewEconomy> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                _sendNewEconomy(_tipo.text, _data.text, _valor.text);
+                _sendNewEconomy(int.parse(_tipo.text), _data.text, _valor.text);
                 Navigator.pop(context);
               },
               child: Text(

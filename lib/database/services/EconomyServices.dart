@@ -21,15 +21,15 @@ class EconomyServices{
     return Expense.fromJsonList(preCattleList);
   }
 
-  static Future<int> createEconomy(double amount, String date) async {
+  static Future<int> createEconomy(double amount, String date, int type) async {
     assert(date != "", "Erro");
 
     Database database = await getDatabase();
 
     String cpf = await AppSharedPreferences.readUserCpf();
 
-    String sql = 'INSERT INTO expense(amount,date,type_idType,user_cpf) VALUES (?, ?, 1, ?)';
-    List<dynamic> args = [amount, date, cpf];
+    String sql = 'INSERT INTO expense(amount,date,type_idType,user_cpf) VALUES (?, ?, ?, ?)';
+    List<dynamic> args = [amount, date, type, cpf];
     int insertStatus = await database.rawInsert(sql,args);
 
     return insertStatus;

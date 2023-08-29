@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:fetin/constants/Colors.dart';
 import 'package:fetin/database/services/TypeServices.dart';
 import 'package:fetin/models/ExpenseModel.dart';
 import 'package:fetin/models/TypeModel.dart';
@@ -22,7 +23,6 @@ class _CardTwoState extends State<CardTwo> {
     super.initState();
 
     TypeServices.getTypeById(widget.expense.type_idType).then((value) {
-      print(value[0]);
       type = value[0];
       setState(() {});
     });
@@ -88,7 +88,7 @@ class _CardTwoState extends State<CardTwo> {
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(20),
                             topRight: Radius.circular(20)),
-                        color: Colors.purple,
+                        color: COLORS[widget.expense.type_idType-1],
                       ),
                       margin: EdgeInsets.only(left: 10),
                       alignment: AlignmentDirectional.center,

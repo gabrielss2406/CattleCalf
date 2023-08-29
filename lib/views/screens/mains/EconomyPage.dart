@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:fetin/constants/Colors.dart';
 import 'package:fetin/database/services/EconomyServices.dart';
+import 'package:fetin/database/services/TypeServices.dart';
 import 'package:fetin/models/ExpenseModel.dart';
 import 'package:fetin/views/widgets/cardEconomy.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ class EconomyPage extends StatefulWidget {
 }
 
 class _EconomyPageState extends State<EconomyPage> {
+  List<EconomyData> data = [];
   List<Expense> expenseList = [];
 
   @override
@@ -25,9 +28,19 @@ class _EconomyPageState extends State<EconomyPage> {
       expenseList = value;
       setState(() {});
     });
+
+    TypeServices.getTypeList().then((value) {
+      int cont = 0;
+      for (var element in value) {
+        
+        data.add(EconomyData(element['type_name'].toString(), element['type_name'].toString(), (element['total_expenses'] as num?)?.toInt() ?? 0, COLORS[cont]));
+        cont++;
+      }
+      setState(() {});
+    });
   }
 
-  final List<EconomyData> data = [
+  /*List<EconomyData> data = [
     EconomyData('Vacune', 'Vacune', 100, Colors.pink),
     EconomyData('Portion', 'Portion', 50, Colors.red),
     EconomyData('Energy', 'Energy', 30, Colors.amber),
@@ -35,7 +48,7 @@ class _EconomyPageState extends State<EconomyPage> {
     EconomyData('Materials', 'Materials', 200, Colors.deepOrange),
     EconomyData('Salt', 'Salt', 80, Colors.green),
     EconomyData('Others', 'Others', 55, Colors.purple),
-  ];
+  ];*/
 
   @override
   Widget build(BuildContext context) {
