@@ -40,16 +40,6 @@ class _EconomyPageState extends State<EconomyPage> {
     });
   }
 
-  /*List<EconomyData> data = [
-    EconomyData('Vacune', 'Vacune', 100, Colors.pink),
-    EconomyData('Portion', 'Portion', 50, Colors.red),
-    EconomyData('Energy', 'Energy', 30, Colors.amber),
-    EconomyData('Water', 'Water', 20, Colors.cyan),
-    EconomyData('Materials', 'Materials', 200, Colors.deepOrange),
-    EconomyData('Salt', 'Salt', 80, Colors.green),
-    EconomyData('Others', 'Others', 55, Colors.purple),
-  ];*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

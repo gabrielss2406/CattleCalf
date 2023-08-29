@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:fetin/database/services/AnnotationServices.dart';
 import 'package:fetin/database/services/WeightServices.dart';
+import 'package:fetin/models/AnnotationModel.dart';
 import 'package:fetin/models/CattleModel.dart';
 import 'package:fetin/models/WeightModel.dart';
 import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:fetin/views/screens/pop_ups/InsertNewAnnotation.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewWeight.dart';
+import 'package:fetin/views/widgets/cardAnnotation.dart';
 import 'package:fetin/views/widgets/cardWeight.dart';
 import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/appBar.dart';
@@ -19,26 +23,40 @@ class InsightsCow extends StatefulWidget {
 
 class _InsightsCowState extends State<InsightsCow> {
   List<Weight> weightList = [];
+  List<Annotation> annotationList = [];
 
   @override
   initState() {
     super.initState();
     // Exec async funcions
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      WeightServices.getWeightList(widget.cattle.idCattle).then((value) {
-        weightList = value;
-        setState(() {});
-      },);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      WeightServices.getWeightList(widget.cattle.idCattle).then(
+        (value) {
+          weightList = value;
+          setState(() {});
+        },
+      );
+
+      AnnotationServices.getAnnotationList(widget.cattle.idCattle).then(
+        (value) {
+          annotationList = value;
+          setState(() {});
+        },
+      );
     });
   }
 
-  void _openWidget(BuildContext context) {
+  void _openWidget(BuildContext context, int option) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Color.fromARGB(125, 0, 0, 0),
       isScrollControlled: true,
       builder: (BuildContext context) {
+        if(option==1) {
           return NewWeight(idCattle: widget.cattle.idCattle);
+        } else {
+          return NewAnnotation(idCattle: widget.cattle.idCattle);
+        }
       },
     );
   }
@@ -126,21 +144,22 @@ class _InsightsCowState extends State<InsightsCow> {
                                   child: IconButton(
                                     icon: Icon(Icons.add),
                                     color: Colors.white,
-                                    onPressed: () => _openWidget(context),
+                                    onPressed: () => _openWidget(context, 1),
                                   ),
                                 ),
                                 Expanded(
                                   child: ListView.builder(
-                                  itemCount: weightList.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      margin: EdgeInsets.all(0),
-                                      child: CardThree(weight: weightList[index],),
-                                    );
-                                  },
+                                    itemCount: weightList.length,
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        margin: EdgeInsets.all(0),
+                                        child: CardThree(
+                                          weight: weightList[index],
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
-                                ),
-                                
                               ],
                             )),
                       ),
@@ -149,14 +168,39 @@ class _InsightsCowState extends State<InsightsCow> {
                         child: Row(
                           children: [
                             Expanded(
-                                flex: 2,
-                                child: Container(
+                              flex: 2,
+                              child: Container(
                                   margin: EdgeInsets.only(
                                       left: 10, right: 10, bottom: 10),
+                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                       color: Color.fromARGB(255, 120, 144, 72),
                                       borderRadius: BorderRadius.circular(15)),
-                                )),
+                                  child: Column(
+                                    children: [
+                                      Ink(
+                                        child: IconButton(
+                                          icon: Icon(Icons.add),
+                                          color: Colors.white,
+                                          onPressed: () => _openWidget(context, 2),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: ListView.builder(
+                                          itemCount: weightList.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              margin: EdgeInsets.all(0),
+                                              child: CardFour(
+                                                weight: weightList[index],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
                             Expanded(
                                 flex: 1,
                                 child: Container(
@@ -169,8 +213,10 @@ class _InsightsCowState extends State<InsightsCow> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        iconId("${widget.cattle.cattle_idCattle_sire}\nPai"),
-                                        iconId("${widget.cattle.cattle_idCattle_dam}\nMãe")
+                                        iconId(
+                                            "${widget.cattle.cattle_idCattle_sire}\nPai"),
+                                        iconId(
+                                            "${widget.cattle.cattle_idCattle_dam}\nMãe")
                                       ]),
                                 ))
                           ],
@@ -199,10 +245,8 @@ class _InsightsCowState extends State<InsightsCow> {
             child: Padding(
               padding: const EdgeInsets.only(top: 30),
               child: Text(
-                textAlign: TextAlign.center, 
-                text.contains("null")
-                ? ""
-                : text,
+                textAlign: TextAlign.center,
+                text.contains("null") ? "" : text,
                 style: const TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 15,

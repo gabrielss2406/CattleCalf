@@ -10,6 +10,11 @@ class NewCow extends StatefulWidget {
 }
 
 class _NewCowState extends State<NewCow> {
+  final _id = TextEditingController();
+  final _raca = TextEditingController();
+  final _data = TextEditingController();
+  final _idpai = TextEditingController();
+  final _idmae = TextEditingController();
 
   Future<void> _sendNewCow(String? id,String breed, String date, String idDad, String idMom) async {
     try {
@@ -27,12 +32,6 @@ class _NewCowState extends State<NewCow> {
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
-        final _id = TextEditingController();
-        final _raca = TextEditingController();
-        final _data = TextEditingController();
-        final _idpai = TextEditingController();
-        final _idmae = TextEditingController();
-
         return AlertDialog(
           title: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),

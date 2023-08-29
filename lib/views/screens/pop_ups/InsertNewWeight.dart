@@ -12,6 +12,8 @@ class NewWeight extends StatefulWidget {
 }
 
 class _NewWeightState extends State<NewWeight> {
+  final _peso = TextEditingController();
+  final _data = TextEditingController();
 
   Future<void> _sendNewWeight(String weight, String date) async {
 
@@ -31,8 +33,6 @@ class _NewWeightState extends State<NewWeight> {
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
-        final _peso = TextEditingController();
-        final _data = TextEditingController();
 
         return AlertDialog(
           title: Container(

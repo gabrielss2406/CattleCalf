@@ -10,6 +10,9 @@ class NewEconomy extends StatefulWidget {
 }
 
 class _NewEconomyState extends State<NewEconomy> {
+  final _tipo = TextEditingController();
+  final _data = TextEditingController();
+  final _valor = TextEditingController();
 
   Future<void> _sendNewEconomy(int type, String date, String value) async {
 
@@ -29,10 +32,6 @@ class _NewEconomyState extends State<NewEconomy> {
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
-        final _tipo = TextEditingController();
-        final _data = TextEditingController();
-        final _valor = TextEditingController();
-
         return AlertDialog(
           title: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),

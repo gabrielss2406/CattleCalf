@@ -1,22 +1,39 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+import 'package:fetin/database/services/AnnotationServices.dart';
 import 'package:flutter/material.dart';
 
-class NewInsights extends StatefulWidget {
-  const NewInsights({super.key});
+class NewAnnotation extends StatefulWidget {
+  final int? idCattle; // Adicione essa propriedade
+
+  const NewAnnotation({Key? key, required this.idCattle}) : super(key: key);
 
   @override
-  State<NewInsights> createState() => _NewInsightsState();
+  State<NewAnnotation> createState() => _NewAnnotationState();
 }
 
-class _NewInsightsState extends State<NewInsights> {
+class _NewAnnotationState extends State<NewAnnotation> {
+  final _titulo = TextEditingController();
+  final _data = TextEditingController();
+  final _anotacao = TextEditingController();
+
+  Future<void> _sendNewWeight(String weight, String date) async {
+
+    try {
+      await AnnotationServices.createAnnotation(weight, date, widget.idCattle);
+    } catch (error) {
+      // Tratamento de erro
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Erro ao enviar o registro.'),
+        backgroundColor: Colors.red,
+      ));
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
-        final _titulo = TextEditingController();
-        final _data = TextEditingController();
-        final _anotacao = TextEditingController();
-
         return AlertDialog(
           title: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),

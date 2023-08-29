@@ -2,7 +2,6 @@
 
 import 'package:fetin/views/screens/pop_ups/InsertNewCow.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewEconomy.dart';
-import 'package:fetin/views/screens/pop_ups/InsertNewInsight.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -28,9 +27,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
         } else if (type == 1) {
           return NewEconomy();
         } else if (type == 2) {
-          return NewInsights();
+          return Container();
         } else {
-          return NewInsights();
+          return Container();
         }
       },
     );
@@ -46,7 +45,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
         width: 30,
         height: 30,
       ),
+      
+      
       actions: [
+        widget.popUpPage == 0 || widget.popUpPage == 1
+        ?
         Ink(
           child: IconButton(
             icon: Icon(Icons.add),
@@ -54,6 +57,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
             onPressed: () => _openWidget(context, widget.popUpPage),
           ),
         )
+
+        :
+        Container()
       ],
     );
   }
