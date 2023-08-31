@@ -1,17 +1,29 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'package:fetin/models/WeightModel.dart';
+import 'package:fetin/models/AnnotationModel.dart';
+import 'package:fetin/views/screens/pop_ups/AnnotationDetails.dart';
 import 'package:flutter/material.dart';
 
 class CardFour extends StatefulWidget {
-  final Weight weight; // Adicione essa propriedade
+  final Annotation annotation; // Adicione essa propriedade
 
-  const CardFour({Key? key, required this.weight}) : super(key: key);
+  const CardFour({Key? key, required this.annotation}) : super(key: key);
 
   @override
   State<CardFour> createState() => _CardFourState();
 }
 
 class _CardFourState extends State<CardFour> {
+  void _openWidget(BuildContext context, int option) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Color.fromARGB(125, 0, 0, 0),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return AnnotationDetails(annotation: widget.annotation,);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,28 +40,31 @@ class _CardFourState extends State<CardFour> {
             const Color.fromARGB(255, 68, 49, 42),
             const Color.fromARGB(255, 68, 49, 42),
           ],
-          stops: [0.0, 0.5, 0.5, 1.0],
+          stops: [0.0, 0.8, 0.8, 1.0],
         ),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            widget.weight.date.toUpperCase(),
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.brown[800],
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 8.0), // Adicione um espaçamento à esquerda
+            child: Text(
+              widget.annotation.reminder.toUpperCase(),
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.brown[800],
+              ),
             ),
           ),
-          Text(
-            ('note').toUpperCase(),
-            style: TextStyle(
-              fontSize: 18,
+          Ink(
+            child: IconButton(
+              icon: Icon(Icons.edit_note),
               color: Colors.white,
+              onPressed: () => _openWidget(context, 1),
             ),
-          ),
-          Icon(Icons.edit_note, color: Colors.white),
+          )
         ],
       ),
     );

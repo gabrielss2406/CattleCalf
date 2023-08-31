@@ -13,12 +13,12 @@ class AnnotationServices{
 
     String sql = 'SELECT * FROM annotation WHERE cattle_idCattle = ? ORDER BY date DESC';
     List<dynamic> args = [idCattle];
-    var preWeightList = (await database.rawQuery(sql,args));
+    var preAnnotationList = (await database.rawQuery(sql,args));
 
-    return Annotation.fromJsonList(preWeightList);
+    return Annotation.fromJsonList(preAnnotationList);
   }
 
-  static Future<int> createAnnotation(String reminder, String annotation, int? idCattle) async {
+  static Future<int> createAnnotation(String reminder, String annotation, String date, int? idCattle) async {
 
     assert(reminder != "", "Erro");
     assert(annotation != "", "Erro");
@@ -26,8 +26,8 @@ class AnnotationServices{
 
     Database database = await getDatabase();
 
-    String sql = 'INSERT INTO annotation (reminder, annotation, cattle_idCattle) VALUES (?, ?, ?);';
-    List<dynamic> args = [reminder, annotation, idCattle];
+    String sql = 'INSERT INTO annotation (reminder, annotation, date, cattle_idCattle) VALUES (?, ?, ?, ?);';
+    List<dynamic> args = [reminder, annotation, date, idCattle];
     int insertStatus = await database.rawInsert(sql,args);
 
     return insertStatus;

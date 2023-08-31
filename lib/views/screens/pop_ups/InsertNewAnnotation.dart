@@ -16,11 +16,12 @@ class _NewAnnotationState extends State<NewAnnotation> {
   final _data = TextEditingController();
   final _anotacao = TextEditingController();
 
-  Future<void> _sendNewWeight(String weight, String date) async {
+  Future<void> _sendNewAnnotation(String reminder, String annotation, String date) async {
 
     try {
-      await AnnotationServices.createAnnotation(weight, date, widget.idCattle);
+      await AnnotationServices.createAnnotation(reminder, annotation, date, widget.idCattle);
     } catch (error) {
+      print(error);
       // Tratamento de erro
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Erro ao enviar o registro.'),
@@ -42,7 +43,7 @@ class _NewAnnotationState extends State<NewAnnotation> {
                 borderRadius: BorderRadius.circular(5)),
             alignment: Alignment.center,
             child: Text(
-              'Novo registro',
+              'Nova Anotação',
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -63,6 +64,7 @@ class _NewAnnotationState extends State<NewAnnotation> {
           actions: [
             ElevatedButton(
               onPressed: () {
+                _sendNewAnnotation(_titulo.text, _anotacao.text, _data.text);
                 Navigator.pop(context);
               },
               child: Text(

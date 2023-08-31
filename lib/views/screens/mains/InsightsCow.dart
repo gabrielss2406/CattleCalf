@@ -187,12 +187,12 @@ class _InsightsCowState extends State<InsightsCow> {
                                       ),
                                       Expanded(
                                         child: ListView.builder(
-                                          itemCount: weightList.length,
+                                          itemCount: annotationList.length,
                                           itemBuilder: (context, index) {
                                             return Container(
                                               margin: EdgeInsets.all(0),
                                               child: CardFour(
-                                                weight: weightList[index],
+                                                annotation: annotationList[index],
                                               ),
                                             );
                                           },

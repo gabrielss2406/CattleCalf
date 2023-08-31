@@ -20,6 +20,7 @@ class _NewEconomyState extends State<NewEconomy> {
       await EconomyServices.createEconomy(double.tryParse(value) ?? 0.0, date, type);
     } catch (error) {
       // Tratamento de erro
+      print(error);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Erro ao enviar o registro.'),
         backgroundColor: Colors.red,
@@ -40,7 +41,7 @@ class _NewEconomyState extends State<NewEconomy> {
                 borderRadius: BorderRadius.circular(5)),
             alignment: Alignment.center,
             child: Text(
-              'Novo registro',
+              'Novo gasto',
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -61,7 +62,7 @@ class _NewEconomyState extends State<NewEconomy> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                _sendNewEconomy(int.parse(_tipo.text), _data.text, _valor.text);
+                _sendNewEconomy(int.tryParse(_tipo.text) ?? 0, _data.text, _valor.text);
                 Navigator.pop(context);
               },
               child: Text(

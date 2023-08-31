@@ -42,7 +42,7 @@ class _NewWeightState extends State<NewWeight> {
                 borderRadius: BorderRadius.circular(5)),
             alignment: Alignment.center,
             child: Text(
-              'Novo registro',
+              'Novo peso',
               style: TextStyle(
                 color: Colors.white,
               ),

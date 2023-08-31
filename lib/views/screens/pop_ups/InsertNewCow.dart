@@ -40,7 +40,7 @@ class _NewCowState extends State<NewCow> {
                 borderRadius: BorderRadius.circular(5)),
             alignment: Alignment.center,
             child: Text(
-              'Novo registro',
+              'Novo gado',
               style: TextStyle(
                 color: Colors.white,
               ),
