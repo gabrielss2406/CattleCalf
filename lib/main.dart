@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/filter': (context) => FilterPage(),
         //'/insights': (context) => InsightsCow(),
       },
+      theme: ThemeData(primarySwatch: Colors.brown),
     );
   }
 }

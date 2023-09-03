@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
 import 'package:fetin/database/services/CattleServices.dart';
 import 'package:fetin/database/services/EconomyServices.dart';
 import 'package:fetin/models/CattleModel.dart';
@@ -18,13 +18,29 @@ class _NewEconomyState extends State<NewEconomy> {
   final _data = TextEditingController();
   final _valor = TextEditingController();
 
+  @override
+  initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CattleServices.getCattleListByUser().then((value) {
+        setState(() {
+          cattleList = value;
+        });
+        // Quando a lista cattleList estiver pronta, crie e mostre o AlertDialog
+        final alertDialog = buildAlertDialogWithSelectionField(cattleList);
+        showDialog(
+          context: context,
+          builder: (context) => alertDialog,
+        );
+      });
+    });
+  }
+
   Future<void> _sendNewEconomy(int type, String date, String value) async {
     try {
       await EconomyServices.createEconomy(
           double.tryParse(value) ?? 0.0, date, type);
     } catch (error) {
-      // Tratamento de erro
-      print(error);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Erro ao enviar o registro.'),
         backgroundColor: Colors.red,
@@ -82,26 +98,6 @@ class _NewEconomyState extends State<NewEconomy> {
         ),
       ],
     );
-  }
-
-  @override
-  initState() {
-    super.initState();
-    // Exec async funcions
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      CattleServices.getCattleListByUser().then((value) {
-        setState(() {
-          cattleList = value;
-        });
-        print(cattleList);
-        // Quando a lista cattleList estiver pronta, crie e mostre o AlertDialog
-        final alertDialog = buildAlertDialogWithSelectionField(cattleList);
-        showDialog(
-          context: context,
-          builder: (context) => alertDialog,
-        );
-      });
-    });
   }
 
   @override
