@@ -4,6 +4,7 @@ import 'package:fetin/database/services/EconomyServices.dart';
 import 'package:fetin/models/CattleModel.dart';
 import 'package:fetin/views/widgets/selectionField.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewEconomy extends StatefulWidget {
   const NewEconomy({super.key});
@@ -15,7 +16,7 @@ class NewEconomy extends StatefulWidget {
 class _NewEconomyState extends State<NewEconomy> {
   List<Cattle> cattleList = [];
   final _tipo = TextEditingController();
-  final _data = TextEditingController();
+  var _data = DateTime.now();
   final _valor = TextEditingController();
 
   @override
@@ -58,7 +59,7 @@ class _NewEconomyState extends State<NewEconomy> {
             color: Colors.brown[800], borderRadius: BorderRadius.circular(5)),
         alignment: Alignment.center,
         child: Text(
-          'Novo gasto',
+          'Novo Gasto',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -71,14 +72,61 @@ class _NewEconomyState extends State<NewEconomy> {
           mainAxisSize: MainAxisSize.min,
           children: [
             textEntry(_tipo, 'Tipo'),
-            textEntry(_data, 'data'),
+            Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 120, 144, 72),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              margin: EdgeInsets.only(top: 5, bottom: 5),
+              padding: EdgeInsets.all(5),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        DateFormat('dd-MM-yyyy').format(_data),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+                        ).then(
+                          (value) {
+                            setState(() {
+                              _data = value!;
+                            });
+                          },
+                        );
+                      },
+                      child: Icon(Icons.calendar_month),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.brown[800],
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             textEntry(_valor, 'valor'),
             StyledSelectionField(
                 title: "Associar gado ao gasto",
                 list: cattleList
                     .map((cattle) => '${cattle.idCattle} - ${cattle.breed}')
-                    .toList()
-                ),
+                    .toList()),
           ],
         ),
       ),
@@ -86,7 +134,10 @@ class _NewEconomyState extends State<NewEconomy> {
         ElevatedButton(
           onPressed: () {
             _sendNewEconomy(
-                int.tryParse(_tipo.text) ?? 0, _data.text, _valor.text);
+              int.tryParse(_tipo.text) ?? 0,
+              DateFormat('dd-MM-yyyy').format(_data).toString(),
+              _valor.text,
+            );
             Navigator.pop(context);
           },
           child: Text(
@@ -102,7 +153,7 @@ class _NewEconomyState extends State<NewEconomy> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(); // Este é apenas um exemplo de widget de retorno, você deve retornar o que desejar aqui.
+    return Container();
   }
 
   Widget textEntry(controller, text) {

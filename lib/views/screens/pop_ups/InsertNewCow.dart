@@ -28,7 +28,7 @@ class _NewCowState extends State<NewCow> {
         setState(() {
           cattleList = value;
         });
-        // Quando a lista cattleList estiver pronta, crie e mostre o AlertDialog
+
         final alertDialog = buildAlertDialogWithSelectionField(cattleList);
         showDialog(
           context: context,
@@ -60,7 +60,7 @@ class _NewCowState extends State<NewCow> {
             color: Colors.brown[800], borderRadius: BorderRadius.circular(5)),
         alignment: Alignment.center,
         child: Text(
-          'Novo gasto',
+          'Novo Gado',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -87,9 +87,12 @@ class _NewCowState extends State<NewCow> {
                     children: [
                       Expanded(
                         flex: 3,
-                        child: Text(
-                          DateFormat('dd/MM/yyyy').format(_data),
-                          style: TextStyle(color: Colors.white),
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text(
+                            DateFormat('dd-MM-yyyy').format(_data),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                       Expanded(
@@ -140,8 +143,13 @@ class _NewCowState extends State<NewCow> {
       actions: [
         ElevatedButton(
           onPressed: () {
-            _sendNewCow(_id.text, _raca.text, _data.toString(), _idpai.text,
-                _idmae.text);
+            _sendNewCow(
+              _id.text,
+              _raca.text,
+              DateFormat('dd-MM-yyyy').format(_data).toString(),
+              _idpai.text,
+              _idmae.text,
+            );
             Navigator.pop(context);
           },
           child: Text(

@@ -18,11 +18,8 @@ Widget chartData(List<EconomyData> data) {
     animate: true,
     primaryMeasureAxis: charts.NumericAxisSpec(
       renderSpec: charts.GridlineRendererSpec(
-        labelStyle: charts.TextStyleSpec(
-          color: charts.Color.fromHex(
-              code:
-                  "#789048"), // Defina a cor desejada para a legenda do eixo de medida
-        ),
+        labelStyle:
+            charts.TextStyleSpec(color: charts.Color.fromHex(code: "#789048")),
       ),
     ),
     domainAxis: const charts.OrdinalAxisSpec(
@@ -43,7 +40,12 @@ Widget chartData(List<EconomyData> data) {
       height: 250,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color.fromARGB(255, 120, 144, 72),
+        ),
+      ),
       child: barChart,
     ),
   );

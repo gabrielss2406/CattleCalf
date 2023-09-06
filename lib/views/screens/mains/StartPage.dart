@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import '../../../database/services/CattleServices.dart';
 import '../../../models/CattleModel.dart';
 
-
 class StartPage extends StatefulWidget {
   @override
   _StartPageState createState() => _StartPageState();
@@ -20,24 +19,22 @@ class _StartPageState extends State<StartPage> {
   String _searchQuery = '';
   bool _showNewCow = false;
 
-
   @override
   initState() {
     super.initState();
     // Exec async funcions
-    WidgetsBinding.instance.addPostFrameCallback((_){
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       // TEMP CODE (Login) ================================
-      AuthServices.verifyLogged().then((value) {
-        if(value){
-          print("Já logado!!");
-          // Navigator
-        }
-        else{
-          print("Fazendo login...");
-          AuthServices.doLogin("02126632679", "senha123");
-        }
-      },
+      AuthServices.verifyLogged().then(
+        (value) {
+          if (value) {
+            print("Já logado!!");
+            // Navigator
+          } else {
+            print("Fazendo login...");
+            AuthServices.doLogin("02126632679", "senha123");
+          }
+        },
       );
       // ===================================================
 
@@ -45,12 +42,6 @@ class _StartPageState extends State<StartPage> {
         cattleList = value;
         setState(() {});
       });
-    });
-  }
-
-  void _toggleNewCow() {
-    setState(() {
-      _showNewCow = !_showNewCow;
     });
   }
 
@@ -77,8 +68,7 @@ class _StartPageState extends State<StartPage> {
               child: Theme(
                 data: Theme.of(context).copyWith(
                   textSelectionTheme: TextSelectionThemeData(
-                    selectionColor: Color.fromARGB(
-                        255, 96, 72, 72), // Cor do texto quando selecionado
+                    selectionColor: Color.fromARGB(255, 96, 72, 72),
                   ),
                 ),
                 child: TextField(
@@ -91,7 +81,7 @@ class _StartPageState extends State<StartPage> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: Color.fromARGB(255, 96, 72, 72), // Cor do texto
+                    color: Color.fromARGB(255, 96, 72, 72),
                   ),
                   decoration: InputDecoration(
                     hintText: 'Pesquisar',
@@ -104,7 +94,7 @@ class _StartPageState extends State<StartPage> {
                       color: Color.fromARGB(255, 120, 144, 72),
                     ),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.6),
+                    fillColor: Colors.white,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(
@@ -137,8 +127,6 @@ class _StartPageState extends State<StartPage> {
             ),
           ),
         ],
-
-
       ),
       bottomNavigationBar: NavBar(currentIndex: 0),
     );
