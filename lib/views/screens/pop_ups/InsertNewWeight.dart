@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
 import 'package:fetin/database/services/WeightServices.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewWeight extends StatefulWidget {
   final int? idCattle; // Adicione essa propriedade
@@ -13,10 +14,9 @@ class NewWeight extends StatefulWidget {
 
 class _NewWeightState extends State<NewWeight> {
   final _peso = TextEditingController();
-  final _data = TextEditingController();
+  var _data = DateTime.now();
 
   Future<void> _sendNewWeight(String weight, String date) async {
-
     try {
       await WeightServices.createWeight(weight, date, widget.idCattle);
     } catch (error) {
@@ -26,14 +26,12 @@ class _NewWeightState extends State<NewWeight> {
         backgroundColor: Colors.red,
       ));
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
-
         return AlertDialog(
           title: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
@@ -55,14 +53,63 @@ class _NewWeightState extends State<NewWeight> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 textEntry(_peso, 'Peso'),
-                textEntry(_data, 'Data'),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 120, 144, 72),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  margin: EdgeInsets.only(top: 5, bottom: 5),
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Text(
+                            DateFormat('dd-MM-yyyy').format(_data),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(2100),
+                            ).then(
+                              (value) {
+                                setState(() {
+                                  _data = value!;
+                                });
+                              },
+                            );
+                          },
+                          child: Icon(Icons.calendar_month),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.brown[800],
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
           actions: [
             ElevatedButton(
               onPressed: () {
-                _sendNewWeight(_peso.text, _data.text);
+                _sendNewWeight(_peso.text,
+                    DateFormat('dd-MM-yyyy').format(_data).toString());
                 Navigator.pop(context);
               },
               child: Text(

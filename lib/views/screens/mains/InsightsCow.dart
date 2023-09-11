@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 
 class InsightsCow extends StatefulWidget {
-  final Cattle cattle; // Adicione essa propriedade
+  final Cattle cattle;
 
   const InsightsCow({Key? key, required this.cattle}) : super(key: key);
 
@@ -52,7 +52,7 @@ class _InsightsCowState extends State<InsightsCow> {
       backgroundColor: Color.fromARGB(125, 0, 0, 0),
       isScrollControlled: true,
       builder: (BuildContext context) {
-        if(option==1) {
+        if (option == 1) {
           return NewWeight(idCattle: widget.cattle.idCattle);
         } else {
           return NewAnnotation(idCattle: widget.cattle.idCattle);
@@ -182,7 +182,8 @@ class _InsightsCowState extends State<InsightsCow> {
                                         child: IconButton(
                                           icon: Icon(Icons.add),
                                           color: Colors.white,
-                                          onPressed: () => _openWidget(context, 2),
+                                          onPressed: () =>
+                                              _openWidget(context, 2),
                                         ),
                                       ),
                                       Expanded(
@@ -192,7 +193,8 @@ class _InsightsCowState extends State<InsightsCow> {
                                             return Container(
                                               margin: EdgeInsets.all(0),
                                               child: CardFour(
-                                                annotation: annotationList[index],
+                                                annotation:
+                                                    annotationList[index],
                                               ),
                                             );
                                           },

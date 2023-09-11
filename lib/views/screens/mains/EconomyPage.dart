@@ -26,7 +26,6 @@ class _EconomyPageState extends State<EconomyPage> {
 
     EconomyServices.getExpenseListByUser().then((value) {
       expenseList = value;
-      setState(() {});
     });
 
     TypeServices.getTypeList().then((value) {

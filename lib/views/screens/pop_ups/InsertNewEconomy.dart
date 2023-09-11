@@ -2,6 +2,7 @@
 import 'package:fetin/database/services/CattleServices.dart';
 import 'package:fetin/database/services/EconomyServices.dart';
 import 'package:fetin/models/CattleModel.dart';
+import 'package:fetin/views/screens/mains/EconomyPage.dart';
 import 'package:fetin/views/widgets/selectionField.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -47,7 +48,13 @@ class _NewEconomyState extends State<NewEconomy> {
         backgroundColor: Colors.red,
       ));
     } finally {
-      Navigator.pop(context);
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EconomyPage(),
+        ),
+      );
     }
   }
 
@@ -56,7 +63,9 @@ class _NewEconomyState extends State<NewEconomy> {
       title: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         decoration: BoxDecoration(
-            color: Colors.brown[800], borderRadius: BorderRadius.circular(5)),
+          color: Colors.brown[800],
+          borderRadius: BorderRadius.circular(5),
+        ),
         alignment: Alignment.center,
         child: Text(
           'Novo Gasto',
@@ -138,7 +147,6 @@ class _NewEconomyState extends State<NewEconomy> {
               DateFormat('dd-MM-yyyy').format(_data).toString(),
               _valor.text,
             );
-            Navigator.pop(context);
           },
           child: Text(
             'Enviar',
