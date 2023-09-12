@@ -43,7 +43,6 @@ class _EconomyPageState extends State<EconomyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 240, 216),
       appBar: CustomAppBar(
         popUpPage: 1,
       ),

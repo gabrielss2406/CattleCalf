@@ -24,7 +24,6 @@ class _NewEconomyState extends State<NewEconomy> {
           double.tryParse(value) ?? 0.0, date, type);
     } catch (error) {
       // Tratamento de erro
-      print(error);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Erro ao enviar o registro.'),
         backgroundColor: Colors.red,
