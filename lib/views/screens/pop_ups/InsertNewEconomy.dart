@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
 import 'package:fetin/database/services/CattleServices.dart';
 import 'package:fetin/database/services/EconomyServices.dart';
+import 'package:fetin/database/services/TypeServices.dart';
 import 'package:fetin/models/CattleModel.dart';
 import 'package:fetin/views/screens/mains/EconomyPage.dart';
 import 'package:fetin/views/widgets/selectionField.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:fetin/models/TypeModel.dart';
 
 class NewEconomy extends StatefulWidget {
   const NewEconomy({super.key});
@@ -16,6 +18,7 @@ class NewEconomy extends StatefulWidget {
 
 class _NewEconomyState extends State<NewEconomy> {
   List<Cattle> cattleList = [];
+  List<Type> types = [];
   final _tipo = TextEditingController();
   var _data = DateTime.now();
   final _valor = TextEditingController();
@@ -34,6 +37,12 @@ class _NewEconomyState extends State<NewEconomy> {
           context: context,
           builder: (context) => alertDialog,
         );
+      });
+
+      TypeServices.getTypes().then((value) {
+        setState(() {
+          types = value;
+        });
       });
     });
   }
@@ -58,6 +67,12 @@ class _NewEconomyState extends State<NewEconomy> {
     }
   }
 
+  void _updateTipoValue(String newValue) {
+    setState(() {
+      _tipo.text = newValue;
+    });
+  }
+
   AlertDialog buildAlertDialogWithSelectionField(List<Cattle> cattleList) {
     return AlertDialog(
       title: Container(
@@ -80,7 +95,12 @@ class _NewEconomyState extends State<NewEconomy> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            textEntry(_tipo, 'Tipo'),
+            StyledSelectionField(
+              title: "Tipo de gasto",
+              list:
+                  types.map((type) => '${type.idType} - ${type.name}').toList(),
+              onChanged: _updateTipoValue,
+            ),
             Container(
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 120, 144, 72),
@@ -131,11 +151,11 @@ class _NewEconomyState extends State<NewEconomy> {
               ),
             ),
             textEntry(_valor, 'valor'),
-            StyledSelectionField(
+            /*StyledSelectionField(
                 title: "Associar gado ao gasto",
                 list: cattleList
                     .map((cattle) => '${cattle.idCattle} - ${cattle.breed}')
-                    .toList()),
+                    .toList()),*/
           ],
         ),
       ),
@@ -143,7 +163,7 @@ class _NewEconomyState extends State<NewEconomy> {
         ElevatedButton(
           onPressed: () {
             _sendNewEconomy(
-              int.tryParse(_tipo.text) ?? 0,
+              int.tryParse((_tipo.text).replaceAll(RegExp(r'[^0-9]'), '')) ?? 0,
               DateFormat('dd-MM-yyyy').format(_data).toString(),
               _valor.text,
             );

@@ -39,6 +39,18 @@ class _NewCowState extends State<NewCow> {
     });
   }
 
+  void _updatePaiValue(String newValue) {
+    setState(() {
+      _idpai.text = newValue;
+    });
+  }
+  void _updateMaeValue(String newValue) {
+    setState(() {
+      _idmae.text = newValue;
+    });
+  }
+
+
   Future<void> _sendNewCow(
       String? id, String breed, String date, String idDad, String idMom) async {
     try {
@@ -138,12 +150,14 @@ class _NewCowState extends State<NewCow> {
                     title: "Associar id mãe",
                     list: cattleList
                         .map((cattle) => '${cattle.idCattle} - ${cattle.breed}')
-                        .toList()),
+                        .toList(),
+                    onChanged: _updateMaeValue,),
                 StyledSelectionField(
                     title: "Associar id pai",
                     list: cattleList
                         .map((cattle) => '${cattle.idCattle} - ${cattle.breed}')
-                        .toList()),
+                        .toList(),
+                    onChanged: _updatePaiValue,),
               ],
             ),
           );
@@ -156,8 +170,8 @@ class _NewCowState extends State<NewCow> {
               _id.text,
               _raca.text,
               DateFormat('dd-MM-yyyy').format(_data).toString(),
-              _idpai.text,
-              _idmae.text,
+              _idpai.text.replaceAll(RegExp(r'[^0-9]'), ''),
+              _idmae.text.replaceAll(RegExp(r'[^0-9]'), ''),
             );
           },
           child: Text(

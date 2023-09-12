@@ -28,9 +28,16 @@ class TypeServices{
     """;
     var preCattleList = (await database.rawQuery(sql));
 
-    print(preCattleList);
-
     return preCattleList;
+  }
+
+  static Future<List<Type>> getTypes() async {
+    Database database = await getDatabase();
+
+    String sql = 'SELECT * FROM type';
+    var preCattleList = (await database.rawQuery(sql));
+
+    return Type.fromJsonList(preCattleList);
   }
 
 }

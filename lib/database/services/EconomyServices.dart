@@ -16,13 +16,12 @@ class EconomyServices{
     List<dynamic> args = [cpf];
     var preCattleList = (await database.rawQuery(sql,args));
 
-    print(preCattleList);
-
     return Expense.fromJsonList(preCattleList);
   }
 
   static Future<int> createEconomy(double amount, String date, int type) async {
     assert(date != "", "Erro");
+    assert(type != 0, "Erro");
 
     Database database = await getDatabase();
 

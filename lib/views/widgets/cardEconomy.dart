@@ -21,8 +21,8 @@ class _CardTwoState extends State<CardTwo> {
   @override
   initState() {
     super.initState();
-
     TypeServices.getTypeById(widget.expense.type_idType).then((value) {
+      type = value[0];
       setState(() {});
     });
   }

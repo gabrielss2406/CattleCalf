@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class StyledSelectionField extends StatefulWidget {
   final String title;
   List<String> list = [];
+  Function(String) onChanged;
 
-
-  StyledSelectionField({Key? key, required this.title, required this.list}) : super(key: key);
+  StyledSelectionField({Key? key, required this.title, required this.list, required this.onChanged}) : super(key: key);
 
   @override
   _StyledSelectionFieldState createState() => _StyledSelectionFieldState();
@@ -39,6 +39,7 @@ class _StyledSelectionFieldState extends State<StyledSelectionField> {
         onChanged: (String? newValue) {
           setState(() {
             dropdownController.setSelectedValue(newValue!);
+            widget.onChanged(newValue);
           });
         },
         items: uniqueList
