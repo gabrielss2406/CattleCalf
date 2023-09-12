@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
 import 'package:fetin/database/services/AnnotationServices.dart';
+import 'package:fetin/models/CattleModel.dart';
+import 'package:fetin/views/screens/mains/InsightsCow.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewAnnotation extends StatefulWidget {
-  final int? idCattle; // Adicione essa propriedade
+  final Cattle cattle; // Adicione essa propriedade
 
-  const NewAnnotation({Key? key, required this.idCattle}) : super(key: key);
+  const NewAnnotation({Key? key, required this.cattle}) : super(key: key);
 
   @override
   State<NewAnnotation> createState() => _NewAnnotationState();
@@ -21,7 +23,7 @@ class _NewAnnotationState extends State<NewAnnotation> {
       String reminder, String annotation, String date) async {
     try {
       await AnnotationServices.createAnnotation(
-          reminder, annotation, date, widget.idCattle);
+          reminder, annotation, date, widget.cattle.idCattle);
     } catch (error) {
       print(error);
       // Tratamento de erro
@@ -29,6 +31,14 @@ class _NewAnnotationState extends State<NewAnnotation> {
         content: Text('Erro ao enviar o registro.'),
         backgroundColor: Colors.red,
       ));
+    } finally {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => InsightsCow(cattle: widget.cattle),
+        ),
+      );
     }
   }
 

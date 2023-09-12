@@ -53,9 +53,9 @@ class _InsightsCowState extends State<InsightsCow> {
       isScrollControlled: true,
       builder: (BuildContext context) {
         if (option == 1) {
-          return NewWeight(idCattle: widget.cattle.idCattle);
+          return NewWeight(cattle: widget.cattle);
         } else {
-          return NewAnnotation(idCattle: widget.cattle.idCattle);
+          return NewAnnotation(cattle: widget.cattle);
         }
       },
     );

@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
 import 'package:fetin/database/services/WeightServices.dart';
+import 'package:fetin/models/CattleModel.dart';
+import 'package:fetin/views/screens/mains/InsightsCow.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewWeight extends StatefulWidget {
-  final int? idCattle; // Adicione essa propriedade
+  final Cattle cattle; // Adicione essa propriedade
 
-  const NewWeight({Key? key, required this.idCattle}) : super(key: key);
+  const NewWeight({Key? key, required this.cattle}) : super(key: key);
 
   @override
   State<NewWeight> createState() => _NewWeightState();
@@ -18,13 +20,21 @@ class _NewWeightState extends State<NewWeight> {
 
   Future<void> _sendNewWeight(String weight, String date) async {
     try {
-      await WeightServices.createWeight(weight, date, widget.idCattle);
+      await WeightServices.createWeight(weight, date, widget.cattle.idCattle);
     } catch (error) {
       // Tratamento de erro
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Erro ao enviar o registro.'),
         backgroundColor: Colors.red,
       ));
+    } finally {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => InsightsCow(cattle: widget.cattle),
+        ),
+      );
     }
   }
 
