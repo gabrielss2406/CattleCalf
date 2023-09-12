@@ -17,13 +17,12 @@ class CardTwo extends StatefulWidget {
 
 class _CardTwoState extends State<CardTwo> {
   Type? type;
-  
+
   @override
   initState() {
     super.initState();
 
     TypeServices.getTypeById(widget.expense.type_idType).then((value) {
-      type = value[0];
       setState(() {});
     });
   }
@@ -34,8 +33,7 @@ class _CardTwoState extends State<CardTwo> {
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(40), // Define as bordas arredondadas
+          borderRadius: BorderRadius.circular(40),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -58,27 +56,25 @@ class _CardTwoState extends State<CardTwo> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    top: 10, left: 10, right: 0, bottom: 10),
-                                child: text(
-                                    Colors.brown[800],
-                                    Color.fromARGB(255, 120, 144, 72),
-                                    type?.name ?? '')),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 10, right: 0, bottom: 10),
-                                child: text(
-                                    Colors.brown[800],
-                                    Color.fromARGB(255, 120, 144, 72),
-                                    widget.expense.date)),
-                          ],
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: 10, left: 10, right: 0, bottom: 10),
+                              child: text(
+                                  Colors.brown[800],
+                                  Color.fromARGB(255, 120, 144, 72),
+                                  type?.name ?? '')),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10, right: 0, bottom: 10),
+                              child: text(
+                                  Colors.brown[800],
+                                  Color.fromARGB(255, 120, 144, 72),
+                                  widget.expense.date)),
+                        ],
                       ),
                     ),
                     Container(
@@ -88,7 +84,7 @@ class _CardTwoState extends State<CardTwo> {
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(20),
                             topRight: Radius.circular(20)),
-                        color: COLORS[widget.expense.type_idType-1],
+                        color: COLORS[widget.expense.type_idType - 1],
                       ),
                       margin: EdgeInsets.only(left: 10),
                       alignment: AlignmentDirectional.center,

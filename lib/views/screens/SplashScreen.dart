@@ -1,4 +1,4 @@
-import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:fetin/views/screens/mains/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:lottie/lottie.dart';
@@ -11,7 +11,7 @@ class SplashScreen extends StatelessWidget {
     return AnimatedSplashScreen(
       splash: Lottie.asset('assets/logoStart.json'),
       backgroundColor: Color.fromARGB(255, 96, 120, 72),
-      nextScreen: StartPage(),
+      nextScreen: LoginPage(),
       splashIconSize: 100,
       duration: 1800,
       splashTransition: SplashTransition.fadeTransition,

@@ -19,8 +19,7 @@ class _CardOneState extends State<CardOne> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              InsightsCow(cattle: widget.cattle)), // Substitua NewPage pela página de destino
+          builder: (context) => InsightsCow(cattle: widget.cattle)),
     );
   }
 
@@ -98,7 +97,8 @@ class _CardOneState extends State<CardOne> {
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 15, right: 15, bottom: 10),
-                                child: iconId(widget.cattle.idCattle.toString())),
+                                child:
+                                    iconId(widget.cattle.idCattle.toString())),
                           ],
                         )
                       ],

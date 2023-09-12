@@ -5,7 +5,7 @@ import 'package:fetin/database/services/TypeServices.dart';
 import 'package:fetin/models/ExpenseModel.dart';
 import 'package:fetin/views/widgets/cardEconomy.dart';
 import 'package:flutter/material.dart';
-import 'package:fetin/views/widgets/chart.dart';
+import 'package:fetin/views/widgets/chartEconomy.dart';
 import 'package:fetin/views/widgets/appBar.dart';
 import 'package:fetin/views/widgets/navBar.dart';
 
@@ -26,14 +26,16 @@ class _EconomyPageState extends State<EconomyPage> {
 
     EconomyServices.getExpenseListByUser().then((value) {
       expenseList = value;
-      setState(() {});
     });
 
     TypeServices.getTypeList().then((value) {
       int cont = 0;
       for (var element in value) {
-        
-        data.add(EconomyData(element['type_name'].toString(), element['type_name'].toString(), (element['total_expenses'] as num?)?.toInt() ?? 0, COLORS[cont]));
+        data.add(EconomyData(
+            element['type_name'].toString(),
+            element['type_name'].toString(),
+            (element['total_expenses'] as num?)?.toInt() ?? 0,
+            COLORS[cont]));
         cont++;
       }
       setState(() {});
@@ -43,6 +45,7 @@ class _EconomyPageState extends State<EconomyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         popUpPage: 1,
       ),
@@ -60,7 +63,9 @@ class _EconomyPageState extends State<EconomyPage> {
                 return Container(
                   height: 100,
                   margin: margin,
-                  child: CardTwo(expense: expenseList[index],),
+                  child: CardTwo(
+                    expense: expenseList[index],
+                  ),
                 );
               },
             ),

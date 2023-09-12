@@ -1,5 +1,7 @@
 import 'package:fetin/views/screens/mains/EconomyPage.dart';
 import 'package:fetin/views/screens/SplashScreen.dart';
+import 'package:fetin/views/screens/mains/LoginPage.dart';
+import 'package:fetin/views/screens/mains/RegisterPage.dart';
 import 'package:fetin/views/screens/mains/StartPage.dart';
 import 'package:fetin/views/screens/mains/FilterPage.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +20,14 @@ class MyApp extends StatelessWidget {
       title: "CattleCalf",
       initialRoute: '/splash',
       routes: {
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
         '/splash': (context) => SplashScreen(),
         '/start': (context) => StartPage(),
         '/economy': (context) => EconomyPage(),
         '/filter': (context) => FilterPage(),
-        //'/insights': (context) => InsightsCow(),
       },
+      theme: ThemeData(primarySwatch: Colors.brown),
     );
   }
 }
