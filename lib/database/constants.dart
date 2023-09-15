@@ -1,12 +1,4 @@
 const DATABASE_NAME = "bd_cc";
-/*const CREATE_TABLES_SCRIPT = """
-CREATE TABLE IF NOT EXISTS annotation (
-  idAnnotation INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  annotation VARCHAR(200) NOT NULL,
-  date DATE NOT NULL,
-  reminder VARCHAR(45) NULL
-);
-""";*/
 
 const CREATE_TABLE_WEIGHING = """
 CREATE TABLE IF NOT EXISTS weighing (

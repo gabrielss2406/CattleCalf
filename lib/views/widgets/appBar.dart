@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:fetin/database/syncData.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewCow.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewEconomy.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
         height: 30,
       ),
       
-      
       actions: [
+        Ink(
+          child: IconButton(
+            icon: Icon(Icons.sync),
+            color: Colors.white,
+            onPressed: () => synchronizeData(),
+          ),
+        ),
         widget.popUpPage == 0 || widget.popUpPage == 1
         ?
         Ink(

@@ -1,4 +1,5 @@
 
+import 'package:fetin/constants/VerifyFields.dart';
 import 'package:fetin/models/WeightModel.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -21,6 +22,7 @@ class WeightServices{
   static Future<int> createWeight(String weight, String date, int? idCattle) async {
 
     assert(weight != "", "Erro");
+    assert(isNumeric(weight), "Erro");
     assert(date != "", "Erro");
     assert(idCattle != null && idCattle != 0, "Erro");
 
@@ -31,6 +33,15 @@ class WeightServices{
     int insertStatus = await database.rawInsert(sql,args);
 
     return insertStatus;
+  }
+
+  static Future<List<Weight>> getAllWeight() async {
+    Database database = await getDatabase();
+
+    String sql = 'SELECT * FROM weighing';
+    var preWeightList = (await database.rawQuery(sql));
+    
+    return Weight.fromJsonList(preWeightList);
   }
 
 }

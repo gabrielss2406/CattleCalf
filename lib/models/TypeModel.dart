@@ -7,7 +7,12 @@ class Type{
     required this.name
   });
 
-  Map<String, dynamic> toMap() {
+  static List<Map<String, dynamic>> convertTypeListToJSONList(
+      List<Type> typeList) {
+    return typeList.map((type) => type.toJson()).toList();
+  }
+
+  Map<String, dynamic> toJson() {
     return {
       'idType': idType,
       'name': name

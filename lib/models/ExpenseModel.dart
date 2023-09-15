@@ -11,10 +11,15 @@ class Expense{
     required this.type_idType
   });
 
-  Map<String, dynamic> toMap() {
+  static List<Map<String, dynamic>> convertExpenseListToJSONList(
+      List<Expense> expenseList) {
+    return expenseList.map((expense) => expense.toJson()).toList();
+  }
+
+  Map<String, dynamic> toJson() {
     return {
       'idExpense': idExpense,
-      'annotation': amount,
+      'amount': amount,
       'date': date,
       'type_idType': type_idType
     };
@@ -37,6 +42,4 @@ class Expense{
   static List<Expense> fromJsonList(List<Map<String, dynamic>> jsonList) {
     return jsonList.map((json) => Expense.fromJson(json)).toList();
   }
-
-  
 }

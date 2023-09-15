@@ -1,36 +1,38 @@
-class Weight{
-  final int? idWeight;
+class Weight {
+  final int? idWeighing;
   final double weight;
   final String date;
 
-  const Weight({
-    required this.idWeight,
-    required this.weight,
-    required this.date
-  });
+  const Weight(
+      {required this.idWeighing, required this.weight, required this.date});
 
-  Map<String, dynamic> toMap() {
-    return {
-      'idWeight': idWeight,
-      'annotation': weight,
-      'date': date
-    };
+  static List<Map<String, dynamic>> convertWeightListToJSONList(
+      List<Weight> weightList) {
+    return weightList.map((weight) => weight.toJson()).toList();
   }
 
   @override
   String toString() {
-    return 'Weight{idWeight: $idWeight, weight: $weight, date: $date}';
+    return 'Weight{idWeighing: $idWeighing, weight: $weight, date: $date}';
   }
 
   factory Weight.fromJson(Map<String, dynamic> json) {
     return Weight(
-      idWeight: json['idWeight'],
-      weight: json['weight'],
+      idWeighing: json['idWeighing'],
+      weight: double.parse(json['weight'].toString()),
       date: json['date'],
     );
   }
 
   static List<Weight> fromJsonList(List<Map<String, dynamic>> jsonList) {
     return jsonList.map((json) => Weight.fromJson(json)).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "idWeighing": idWeighing,
+      "weight": weight,
+      "date": date,
+    };
   }
 }

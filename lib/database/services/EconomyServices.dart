@@ -14,9 +14,9 @@ class EconomyServices{
 
     String sql = 'SELECT * FROM expense WHERE user_cpf = ?';
     List<dynamic> args = [cpf];
-    var preCattleList = (await database.rawQuery(sql,args));
+    var preExpenseList = (await database.rawQuery(sql,args));
 
-    return Expense.fromJsonList(preCattleList);
+    return Expense.fromJsonList(preExpenseList);
   }
 
   static Future<int> createEconomy(double amount, String date, int type) async {
@@ -34,4 +34,12 @@ class EconomyServices{
     return insertStatus;
   }
 
+  static Future<List<Expense>> getAllExpense() async {
+    Database database = await getDatabase();
+
+    String sql = 'SELECT * FROM expense';
+    var preExpenseList = (await database.rawQuery(sql));
+    
+    return Expense.fromJsonList(preExpenseList);
+  }
 }
