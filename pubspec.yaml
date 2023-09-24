@@ -46,6 +46,8 @@ dependencies:
   intl: ^0.17.0
   fl_chart: ^0.63.0
   mysql1: ^0.20.0
+  cpf_cnpj_validator: ^2.0.0
+  mask_text_input_formatter: ^2.5.0
   
   
 
