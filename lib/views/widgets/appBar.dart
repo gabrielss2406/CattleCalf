@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:fetin/database/services/AuthServices.dart';
 import 'package:fetin/database/syncData.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewCow.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewEconomy.dart';
@@ -46,7 +47,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
         width: 30,
         height: 30,
       ),
-      
+      leading: Ink(
+        child: IconButton(
+          icon: Icon(Icons.logout),
+          color: Colors.white,
+          onPressed: () => AuthServices.logout(context),
+        ),
+      ),
       actions: [
         Ink(
           child: IconButton(
@@ -56,17 +63,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
         ),
         widget.popUpPage == 0 || widget.popUpPage == 1
-        ?
-        Ink(
-          child: IconButton(
-            icon: Icon(Icons.add),
-            color: Colors.white,
-            onPressed: () => _openWidget(context, widget.popUpPage),
-          ),
-        )
-
-        :
-        Container()
+            ? Ink(
+                child: IconButton(
+                  icon: Icon(Icons.add),
+                  color: Colors.white,
+                  onPressed: () => _openWidget(context, widget.popUpPage),
+                ),
+              )
+            : Container()
       ],
     );
   }

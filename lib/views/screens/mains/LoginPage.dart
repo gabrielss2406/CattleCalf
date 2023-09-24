@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unused_local_variable, use_build_context_synchronously
 
+import 'package:fetin/database/services/AuthServices.dart';
 import 'package:fetin/views/screens/mains/RegisterPage.dart';
 import 'package:fetin/views/screens/mains/StartPage.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,26 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool rememberPassword = false;
+  bool _obscurePassword = true;
+
+  @override
+  initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AuthServices.verifyLogged().then(
+        (value) {
+          if (value) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StartPage(),
+              ),
+            );
+          }
+        },
+      );
+    });
+  }
 
   void navigateToRegister() {
     Navigator.pushReplacement(
@@ -23,9 +44,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _loginWithEmailPassword() {
+  void _loginWithEmailPassword() async {
     String email = emailController.text;
     String password = passwordController.text;
+
+    try {
+      bool result = await AuthServices.doLogin(email, password);
+      print("oi");
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StartPage(),
+          ));
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Verifique sua conexão a internet, seu email e senha.'),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 
   void _loginWithFacebook() {}
@@ -55,7 +91,55 @@ class _LoginPageState extends State<LoginPage> {
                 height: 100,
               ),
               textField(emailController, "Email"),
-              textField(passwordController, "Senha"),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.transparent,
+                  ),
+                ),
+                margin:
+                    EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+                padding: EdgeInsets.only(left: 10),
+                child: TextField(
+                  controller: passwordController,
+                  obscureText: _obscurePassword,
+                  decoration: InputDecoration(
+                    //suffixIconConstraints: //BoxConstraints(
+                    //minHeight: 5.2.h, minWidth: 5.2.h),
+                    suffixIcon: GestureDetector(
+                      child: Icon(
+                          _obscurePassword == false
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black),
+                      onTap: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+                    labelText: "Senha",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    labelStyle: TextStyle(
+                      backgroundColor: Colors.white,
+                      color: Color.fromARGB(255, 120, 144, 72),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 0),
+                  ),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Row(
@@ -147,12 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                       margin: EdgeInsets.only(top: 10),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StartPage(),
-                            ),
-                          );
+                          _loginWithEmailPassword();
                         },
                         icon: Icon(
                           Icons.arrow_forward,
