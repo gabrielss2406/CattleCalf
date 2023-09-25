@@ -22,9 +22,14 @@ class InternetServices {
 
     final jsonResponse = json.decode(response.body);
 
-    SimpleObject obj1 = SimpleObject(id: 1, name: "Média", value: jsonResponse["Average"]);
-    SimpleObject obj2 = SimpleObject(id: 2, name: "Variância", value: jsonResponse["Variance"]);
-    SimpleObject obj3 = SimpleObject(id: 3, name: "Desvio Padrão", value: jsonResponse["Standard Deviation"]);
+    SimpleObject obj1 =
+        SimpleObject(id: 1, name: "Média", value: jsonResponse["Average"]);
+    SimpleObject obj2 =
+        SimpleObject(id: 2, name: "Variância", value: jsonResponse["Variance"]);
+    SimpleObject obj3 = SimpleObject(
+        id: 3,
+        name: "Desvio Padrão",
+        value: jsonResponse["Standard Deviation"]);
 
     final List<SimpleObject> objList = [obj1, obj2, obj3];
 
@@ -37,9 +42,14 @@ class InternetServices {
 
     final jsonResponse = json.decode(response.body);
 
-    SimpleObject obj1 = SimpleObject(id: 1, name: "Soma dos gastos (R\$)", value: jsonResponse["Expense(R\$)"]);
-    SimpleObject obj2 = SimpleObject(id: 2, name: "Soma dos pesos (Kg)", value: jsonResponse["Weight(Kg)"]);
-    SimpleObject obj3 = SimpleObject(id: 3, name: "Custo (R\$/Kg)", value: jsonResponse["Cost (R\$/Kg)"]);
+    SimpleObject obj1 = SimpleObject(
+        id: 1,
+        name: "Soma dos gastos (R\$)",
+        value: jsonResponse["Expense(R\$)"]);
+    SimpleObject obj2 = SimpleObject(
+        id: 2, name: "Soma dos pesos (Kg)", value: jsonResponse["Weight(Kg)"]);
+    SimpleObject obj3 = SimpleObject(
+        id: 3, name: "Custo", value: jsonResponse["Cost (R\$/Kg)"]);
 
     final List<SimpleObject> objList = [obj1, obj2, obj3];
 

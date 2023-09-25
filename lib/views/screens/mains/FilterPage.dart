@@ -52,24 +52,39 @@ class _FilterPageState extends State<FilterPage> {
               future: _arrobaFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator(); // Símbolo de carregamento
+                  return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Erro ao buscar preço da arroba',
                       style: TextStyle(fontSize: 20));
                 } else {
-                  return Text(
-                    'Preço da arroba: ${snapshot.data!.toStringAsFixed(2)} R\$/kg',
-                    style: TextStyle(fontSize: 20),
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red[800],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Arroba: ${snapshot.data!.toStringAsFixed(2)} R\$/kg',
+                      style: TextStyle(
+                          fontSize: 23,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
                   );
                 }
               },
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Divider(color: Colors.brown[800], height: 5),
             ),
             SizedBox(height: 25),
             FutureBuilder(
               future: _weightFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator(); // Símbolo de carregamento
+                  return CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Erro ao carregar dados');
                 } else {
@@ -82,22 +97,39 @@ class _FilterPageState extends State<FilterPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          'Análise dos pesos',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.brown[800],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            'Análise dos pesos',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: 20, left: 20),
+                        padding: EdgeInsets.only(
+                          top: 30,
+                          right: 20,
+                          left: 20,
+                        ),
                         child: chartFilter(firstList, secondList),
                       )
                     ],
                   );
                 }
               },
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Divider(color: Colors.brown[800], height: 5),
             ),
             SizedBox(height: 25),
             FutureBuilder(
@@ -117,16 +149,28 @@ class _FilterPageState extends State<FilterPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          'Análise dos gastos',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.brown[800],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            'Análise dos gastos',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: 20, left: 20),
+                        padding: EdgeInsets.only(
+                          top: 30,
+                          right: 20,
+                          left: 20,
+                        ),
                         child: chartFilter(firstList, secondList),
                       )
                     ],

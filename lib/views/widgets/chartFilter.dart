@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:fetin/constants/Colors.dart';
 import 'package:fetin/models/SimpleModel.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart';
 
 Widget chartFilter(List<SimpleObject> data, SimpleObject variance) {
   final series = data.map((sData) {
@@ -11,9 +14,11 @@ Widget chartFilter(List<SimpleObject> data, SimpleObject variance) {
       domainFn: (SimpleObject object, _) => object.name,
       measureFn: (SimpleObject object, _) => object.value,
       colorFn: (SimpleObject object, _) =>
-          charts.ColorUtil.fromDartColor(COLORS[object.id-1]),
+          charts.ColorUtil.fromDartColor(COLORS[object.id - 1]),
     );
   }).toList();
+
+  final formato = NumberFormat('#,###', "pt_BR");
 
   final barChart = charts.BarChart(
     series,
@@ -51,14 +56,27 @@ Widget chartFilter(List<SimpleObject> data, SimpleObject variance) {
             ),
           ),
           child: barChart,
-        ), // Espaço entre o gráfico e a string extra
-        Text(
-          '${variance.name}: ${variance.value.toStringAsFixed(3)}',
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-          ),
         ),
+        SizedBox(
+          height: 20,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 120, 144, 72),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.all(10),
+          child: Text(
+            variance.name.contains("Custo")
+                ? '${variance.name}: ${variance.value.toStringAsFixed(2).replaceAll(".", ",")} R\$/Kg'
+                : '${variance.name}: ${formato.format(variance.value)} Kg',
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
+            ),
+          ),
+        )
       ],
     ),
   );
