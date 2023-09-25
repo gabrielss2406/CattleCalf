@@ -27,7 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController cpfController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
   TextEditingController passwordTwoController = TextEditingController();
   TextEditingController telefoneController = TextEditingController();
   bool rememberPassword = false;
@@ -42,12 +41,19 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    passwordController.text = "";
+  }
+
   void _registerWithEmailPassword() async {
     String email = emailController.text;
     String name = nameController.text;
-    String cpf = cpfController.text;
+    String cpf = cpfController.text.replaceAll(RegExp(r'[^\d]'), '');
     String address = addressController.text;
-    String telefone = telefoneController.text;
+    String telefone =
+        telefoneController.text.replaceAll(RegExp(r'[()\s-]'), '');
     String password = passwordController.text;
     String passwordTwo = passwordTwoController.text;
 
@@ -55,13 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
       try {
         await AuthServices.register(
             email, name, cpf, address, telefone, password, passwordTwo);
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginPage(),
-            ));
       } catch (error) {
+        print(error);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Verifique sua conexão a internet.'),
           backgroundColor: Colors.red,
@@ -95,19 +96,19 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   SizedBox(height: 50),
                   textField(nameController, "Nome", Validators().validateCommon,
-                      commonMask),
-                  textField(
-                      cpfController, "CPF", Validators().validateCPF, maskCpf),
+                      commonMask, false),
+                  textField(cpfController, "CPF", Validators().validateCPF,
+                      maskCpf, false),
                   textField(addressController, "Endereço",
-                      Validators().validateCommon, commonMask),
+                      Validators().validateCommon, commonMask, false),
                   textField(emailController, "Email",
-                      Validators().validateEmail, commonMask),
+                      Validators().validateEmail, commonMask, false),
                   textField(telefoneController, "Telefone",
-                      Validators().validateTelefone, maskTelefone),
+                      Validators().validateTelefone, maskTelefone, false),
                   textField(passwordController, "Senha",
-                      Validators().validatePassword, maskPassword),
+                      Validators().validatePassword, maskPassword, true),
                   textField(passwordTwoController, "Confirmar senha", false,
-                      maskPassword),
+                      maskPassword, true),
                   SizedBox(height: 10),
                   InkWell(
                     onTap: navigateToLogin,
@@ -148,9 +149,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-}
-
-Widget textField(controller, text, validate, inputFormatters) {
+  bool _obscurePassword = true;
+  Widget textField(controller, text, validate, inputFormatters, password) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
@@ -164,6 +164,9 @@ Widget textField(controller, text, validate, inputFormatters) {
     child: TextFormField(
       inputFormatters: [inputFormatters],
       controller: controller,
+      obscureText: password == true
+      ? _obscurePassword
+      : false,
       validator: validate == false
           ? (value) {
               if (value!.isEmpty) {
@@ -173,8 +176,44 @@ Widget textField(controller, text, validate, inputFormatters) {
               }
               return null;
             }
+            
           : validate,
-      decoration: InputDecoration(
+      decoration: 
+      password == true
+        ? InputDecoration(
+          
+          suffixIcon: GestureDetector(
+                      child: Icon(
+                          _obscurePassword == false
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.brown[800]),
+                      onTap: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
+        labelText: text,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        labelStyle: TextStyle(
+          backgroundColor: Colors.white,
+          color: Color.fromARGB(255, 120, 144, 72),
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 0),
+      )
+        : InputDecoration(
         labelText: text,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -196,4 +235,6 @@ Widget textField(controller, text, validate, inputFormatters) {
       ),
     ),
   );
+}
+
 }

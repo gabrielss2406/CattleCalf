@@ -27,12 +27,12 @@ class _StartPageState extends State<StartPage> {
       // TEMP CODE (Login) ================================
       AuthServices.verifyLogged().then(
         (value) {
+          print("value: "+value.toString());
           if (value) {
             print("Já logado!!");
             // Navigator
           } else {
             print("Fazendo login...");
-            AuthServices.doLogin("02126632679", "senha123");
           }
         },
       );

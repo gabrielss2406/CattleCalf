@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       bool result = await AuthServices.doLogin(email, password);
-      print("oi");
+      if(!result) throw Error;
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -64,7 +64,14 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _loginWithFacebook() {}
+  void _loginWithFacebook(context) async {
+    await AuthServices.doLogin("02126632679", "senha123");
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => StartPage(),
+        ));
+  }
 
   void _loginWithGoogle() {}
 
@@ -106,14 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordController,
                   obscureText: _obscurePassword,
                   decoration: InputDecoration(
-                    //suffixIconConstraints: //BoxConstraints(
-                    //minHeight: 5.2.h, minWidth: 5.2.h),
                     suffixIcon: GestureDetector(
                       child: Icon(
                           _obscurePassword == false
                               ? Icons.visibility_off
                               : Icons.visibility,
-                          color: Colors.black),
+                          color: Colors.brown[800]),
                       onTap: () {
                         setState(() {
                           _obscurePassword = !_obscurePassword;
@@ -211,7 +216,13 @@ class _LoginPageState extends State<LoginPage> {
                       height: 60,
                       margin: EdgeInsets.only(top: 10),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => StartPage(),
+                              ));
+                        },
                         icon: Icon(
                           Icons.facebook,
                           color: Colors.white,

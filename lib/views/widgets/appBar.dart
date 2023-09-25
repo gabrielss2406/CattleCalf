@@ -2,6 +2,7 @@
 
 import 'package:fetin/database/services/AuthServices.dart';
 import 'package:fetin/database/syncData.dart';
+import 'package:fetin/views/screens/mains/LoginPage.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewCow.dart';
 import 'package:fetin/views/screens/pop_ups/InsertNewEconomy.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,38 @@ class _CustomAppBarState extends State<CustomAppBar> {
         child: IconButton(
           icon: Icon(Icons.logout),
           color: Colors.white,
-          onPressed: () => AuthServices.logout(context),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Tem Certeza?'),
+                  content: Text('Você tem certeza de que deseja fazer logout?'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Cancelar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text('Confirmar'),
+                      onPressed: () {
+                        AuthServices.logout(context);
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
         ),
       ),
       actions: [

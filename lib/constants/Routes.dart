@@ -24,4 +24,7 @@ class Routes {
   static String login() {
     return "${authService}users/login";
   }
+  static String register() {
+    return "${authService}users/register";
+  }
 }
