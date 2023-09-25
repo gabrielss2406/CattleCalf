@@ -1,5 +1,5 @@
 
-import 'package:fetin/constants/AppSharedPreferences.dart';
+import 'package:cattecalf/constants/AppSharedPreferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../models/CattleModel.dart';

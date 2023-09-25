@@ -1,9 +1,9 @@
-import 'package:fetin/views/screens/mains/EconomyPage.dart';
-import 'package:fetin/views/screens/SplashScreen.dart';
-import 'package:fetin/views/screens/mains/LoginPage.dart';
-import 'package:fetin/views/screens/mains/RegisterPage.dart';
-import 'package:fetin/views/screens/mains/StartPage.dart';
-import 'package:fetin/views/screens/mains/FilterPage.dart';
+import 'package:cattecalf/views/screens/mains/EconomyPage.dart';
+import 'package:cattecalf/views/screens/SplashScreen.dart';
+import 'package:cattecalf/views/screens/mains/LoginPage.dart';
+import 'package:cattecalf/views/screens/mains/RegisterPage.dart';
+import 'package:cattecalf/views/screens/mains/StartPage.dart';
+import 'package:cattecalf/views/screens/mains/FilterPage.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'package:fetin/constants/Colors.dart';
-import 'package:fetin/database/services/EconomyServices.dart';
-import 'package:fetin/database/services/TypeServices.dart';
-import 'package:fetin/models/ExpenseModel.dart';
-import 'package:fetin/views/widgets/cardEconomy.dart';
+import 'package:cattecalf/constants/Colors.dart';
+import 'package:cattecalf/database/services/EconomyServices.dart';
+import 'package:cattecalf/database/services/TypeServices.dart';
+import 'package:cattecalf/models/ExpenseModel.dart';
+import 'package:cattecalf/views/widgets/cardEconomy.dart';
 import 'package:flutter/material.dart';
-import 'package:fetin/views/widgets/chartEconomy.dart';
-import 'package:fetin/views/widgets/appBar.dart';
-import 'package:fetin/views/widgets/navBar.dart';
+import 'package:cattecalf/views/widgets/chartEconomy.dart';
+import 'package:cattecalf/views/widgets/appBar.dart';
+import 'package:cattecalf/views/widgets/navBar.dart';
 
 class EconomyPage extends StatefulWidget {
   const EconomyPage({super.key});

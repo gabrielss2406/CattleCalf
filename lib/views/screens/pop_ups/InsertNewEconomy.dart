@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
-import 'package:fetin/database/services/CattleServices.dart';
-import 'package:fetin/database/services/EconomyServices.dart';
-import 'package:fetin/database/services/TypeServices.dart';
-import 'package:fetin/models/CattleModel.dart';
-import 'package:fetin/views/screens/mains/EconomyPage.dart';
-import 'package:fetin/views/widgets/selectionField.dart';
+import 'package:cattecalf/database/services/CattleServices.dart';
+import 'package:cattecalf/database/services/EconomyServices.dart';
+import 'package:cattecalf/database/services/TypeServices.dart';
+import 'package:cattecalf/models/CattleModel.dart';
+import 'package:cattecalf/views/screens/mains/EconomyPage.dart';
+import 'package:cattecalf/views/widgets/selectionField.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:fetin/models/TypeModel.dart';
+import 'package:cattecalf/models/TypeModel.dart';
 
 class NewEconomy extends StatefulWidget {
   const NewEconomy({super.key});

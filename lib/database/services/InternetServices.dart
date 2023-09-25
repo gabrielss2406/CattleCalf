@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fetin/models/SimpleModel.dart';
+import 'package:cattecalf/models/SimpleModel.dart';
 import 'package:http/http.dart' as http;
-import 'package:fetin/constants/Routes.dart';
+import 'package:cattecalf/constants/Routes.dart';
 
 class InternetServices {
   Future<double> getArroba() async {

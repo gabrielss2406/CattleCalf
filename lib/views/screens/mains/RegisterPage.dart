@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable
 
-import 'package:fetin/constants/Validators.dart';
-import 'package:fetin/database/services/AuthServices.dart';
-import 'package:fetin/views/screens/mains/LoginPage.dart';
+import 'package:cattecalf/constants/Validators.dart';
+import 'package:cattecalf/database/services/AuthServices.dart';
+import 'package:cattecalf/views/screens/mains/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';

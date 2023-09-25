@@ -1,6 +1,6 @@
 
-import 'package:fetin/constants/AppSharedPreferences.dart';
-import 'package:fetin/models/ExpenseModel.dart';
+import 'package:cattecalf/constants/AppSharedPreferences.dart';
+import 'package:cattecalf/models/ExpenseModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../liteConfig.dart';

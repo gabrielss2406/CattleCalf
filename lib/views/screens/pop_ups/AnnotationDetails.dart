@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
-import 'package:fetin/models/AnnotationModel.dart';
+import 'package:cattecalf/models/AnnotationModel.dart';
 import 'package:flutter/material.dart';
 
 class AnnotationDetails extends StatefulWidget {

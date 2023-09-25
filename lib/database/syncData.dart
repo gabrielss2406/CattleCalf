@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:fetin/constants/Routes.dart';
-import 'package:fetin/database/services/EconomyServices.dart';
-import 'package:fetin/database/services/TypeServices.dart';
-import 'package:fetin/database/services/WeightServices.dart';
-import 'package:fetin/models/ExpenseModel.dart';
-import 'package:fetin/models/WeightModel.dart';
-import 'package:fetin/models/TypeModel.dart';
+import 'package:cattecalf/constants/Routes.dart';
+import 'package:cattecalf/database/services/EconomyServices.dart';
+import 'package:cattecalf/database/services/TypeServices.dart';
+import 'package:cattecalf/database/services/WeightServices.dart';
+import 'package:cattecalf/models/ExpenseModel.dart';
+import 'package:cattecalf/models/WeightModel.dart';
+import 'package:cattecalf/models/TypeModel.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> synchronizeData() async {

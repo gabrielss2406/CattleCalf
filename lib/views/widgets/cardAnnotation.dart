@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'package:fetin/models/AnnotationModel.dart';
-import 'package:fetin/views/screens/pop_ups/AnnotationDetails.dart';
+import 'package:cattecalf/models/AnnotationModel.dart';
+import 'package:cattecalf/views/screens/pop_ups/AnnotationDetails.dart';
 import 'package:flutter/material.dart';
 
 class CardFour extends StatefulWidget {

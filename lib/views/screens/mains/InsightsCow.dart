@@ -1,16 +1,16 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'package:fetin/database/services/AnnotationServices.dart';
-import 'package:fetin/database/services/WeightServices.dart';
-import 'package:fetin/models/AnnotationModel.dart';
-import 'package:fetin/models/CattleModel.dart';
-import 'package:fetin/models/WeightModel.dart';
-import 'package:fetin/views/screens/mains/StartPage.dart';
-import 'package:fetin/views/screens/pop_ups/InsertNewAnnotation.dart';
-import 'package:fetin/views/screens/pop_ups/InsertNewWeight.dart';
-import 'package:fetin/views/widgets/cardAnnotation.dart';
-import 'package:fetin/views/widgets/cardWeight.dart';
+import 'package:cattecalf/database/services/AnnotationServices.dart';
+import 'package:cattecalf/database/services/WeightServices.dart';
+import 'package:cattecalf/models/AnnotationModel.dart';
+import 'package:cattecalf/models/CattleModel.dart';
+import 'package:cattecalf/models/WeightModel.dart';
+import 'package:cattecalf/views/screens/mains/StartPage.dart';
+import 'package:cattecalf/views/screens/pop_ups/InsertNewAnnotation.dart';
+import 'package:cattecalf/views/screens/pop_ups/InsertNewWeight.dart';
+import 'package:cattecalf/views/widgets/cardAnnotation.dart';
+import 'package:cattecalf/views/widgets/cardWeight.dart';
 import 'package:flutter/material.dart';
-import 'package:fetin/views/widgets/appBar.dart';
+import 'package:cattecalf/views/widgets/appBar.dart';
 
 class InsightsCow extends StatefulWidget {
   final Cattle cattle;

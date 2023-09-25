@@ -1,6 +1,6 @@
 
-import 'package:fetin/constants/VerifyFields.dart';
-import 'package:fetin/models/WeightModel.dart';
+import 'package:cattecalf/constants/VerifyFields.dart';
+import 'package:cattecalf/models/WeightModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../liteConfig.dart';

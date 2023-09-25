@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field
-import 'package:fetin/views/widgets/appBar.dart';
-import 'package:fetin/views/widgets/navBar.dart';
-import 'package:fetin/views/widgets/cardCow.dart';
-import 'package:fetin/database/services/AuthServices.dart';
+import 'package:cattecalf/views/widgets/appBar.dart';
+import 'package:cattecalf/views/widgets/navBar.dart';
+import 'package:cattecalf/views/widgets/cardCow.dart';
+import 'package:cattecalf/database/services/AuthServices.dart';
 import 'package:flutter/material.dart';
 
 import '../../../database/services/CattleServices.dart';

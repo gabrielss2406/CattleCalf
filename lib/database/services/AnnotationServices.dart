@@ -1,5 +1,5 @@
 
-import 'package:fetin/models/AnnotationModel.dart';
+import 'package:cattecalf/models/AnnotationModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../liteConfig.dart';

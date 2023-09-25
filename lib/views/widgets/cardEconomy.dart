@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:fetin/constants/Colors.dart';
-import 'package:fetin/database/services/TypeServices.dart';
-import 'package:fetin/models/ExpenseModel.dart';
-import 'package:fetin/models/TypeModel.dart';
+import 'package:cattecalf/constants/Colors.dart';
+import 'package:cattecalf/database/services/TypeServices.dart';
+import 'package:cattecalf/models/ExpenseModel.dart';
+import 'package:cattecalf/models/TypeModel.dart';
 import 'package:flutter/material.dart';
 
 class CardTwo extends StatefulWidget {

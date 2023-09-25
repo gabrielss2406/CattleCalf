@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unused_local_variable, use_build_context_synchronously
 
-import 'package:fetin/database/services/AuthServices.dart';
-import 'package:fetin/views/screens/mains/RegisterPage.dart';
-import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:cattecalf/database/services/AuthServices.dart';
+import 'package:cattecalf/views/screens/mains/RegisterPage.dart';
+import 'package:cattecalf/views/screens/mains/StartPage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 
-import 'package:fetin/models/TypeModel.dart';
+import 'package:cattecalf/models/TypeModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../liteConfig.dart';

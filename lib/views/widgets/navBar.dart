@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:fetin/views/screens/mains/EconomyPage.dart';
-import 'package:fetin/views/screens/mains/FilterPage.dart';
-import 'package:fetin/views/screens/mains/StartPage.dart';
+import 'package:cattecalf/views/screens/mains/EconomyPage.dart';
+import 'package:cattecalf/views/screens/mains/FilterPage.dart';
+import 'package:cattecalf/views/screens/mains/StartPage.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {

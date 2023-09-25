@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'package:fetin/database/services/InternetServices.dart';
-import 'package:fetin/models/SimpleModel.dart';
-import 'package:fetin/views/widgets/chartFilter.dart';
+import 'package:cattecalf/database/services/InternetServices.dart';
+import 'package:cattecalf/models/SimpleModel.dart';
+import 'package:cattecalf/views/widgets/chartFilter.dart';
 import 'package:flutter/material.dart';
-import 'package:fetin/views/widgets/appBar.dart';
-import 'package:fetin/views/widgets/navBar.dart';
+import 'package:cattecalf/views/widgets/appBar.dart';
+import 'package:cattecalf/views/widgets/navBar.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class FilterPage extends StatefulWidget {

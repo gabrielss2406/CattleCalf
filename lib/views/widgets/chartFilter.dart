@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:fetin/constants/Colors.dart';
-import 'package:fetin/models/SimpleModel.dart';
+import 'package:cattecalf/constants/Colors.dart';
+import 'package:cattecalf/models/SimpleModel.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:intl/intl.dart';

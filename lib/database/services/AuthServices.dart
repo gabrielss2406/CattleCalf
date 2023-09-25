@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:fetin/constants/AppSharedPreferences.dart';
-import 'package:fetin/constants/Routes.dart';
+import 'package:cattecalf/constants/AppSharedPreferences.dart';
+import 'package:cattecalf/constants/Routes.dart';
 import 'package:http/http.dart' as http;
 
 class AuthServices {

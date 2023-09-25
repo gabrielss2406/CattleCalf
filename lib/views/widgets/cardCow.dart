@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:fetin/views/screens/mains/InsightsCow.dart';
+import 'package:cattecalf/views/screens/mains/InsightsCow.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/CattleModel.dart';
