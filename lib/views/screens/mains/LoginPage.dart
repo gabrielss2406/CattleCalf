@@ -211,7 +211,13 @@ class _LoginPageState extends State<LoginPage> {
                       height: 60,
                       margin: EdgeInsets.only(top: 10),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => StartPage(),
+                              ));
+                        },
                         icon: Icon(
                           Icons.facebook,
                           color: Colors.white,
