@@ -75,19 +75,42 @@ class _NewEconomyState extends State<NewEconomy> {
 
   AlertDialog buildAlertDialogWithSelectionField(List<Cattle> cattleList) {
     return AlertDialog(
-      title: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        decoration: BoxDecoration(
-          color: Colors.brown[800],
-          borderRadius: BorderRadius.circular(5),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          'Novo Gasto',
-          style: TextStyle(
-            color: Colors.white,
+      title: Row(
+        children: [
+          Expanded(
+            flex: 4,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+              decoration: BoxDecoration(
+                  color: Colors.brown[800],
+                  borderRadius: BorderRadius.circular(5)),
+              alignment: Alignment.center,
+              child: Text(
+                'Novo Gasto',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
-        ),
+          SizedBox(width: 30),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.red[800],
+                  borderRadius: BorderRadius.circular(10)),
+              alignment: Alignment.center,
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                },
+                iconSize: 30.0,
+                color: const Color.fromARGB(255, 255, 255, 255),
+              ),
+            ),
+          ),
+        ],
       ),
       contentPadding: EdgeInsets.all(20),
       backgroundColor: Color.fromARGB(255, 192, 216, 96),
