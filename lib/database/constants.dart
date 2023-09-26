@@ -130,5 +130,5 @@ CREATE TABLE IF NOT EXISTS expense_has_cattle (
 """;
 
 const CREATE_TYPES_REGISTERS = """
-INSERT INTO type(name) VALUES('Vacina'),('Materiais'),('Comida');
+INSERT INTO type(name) VALUES('Vacina'),('Materiais'),('Comida'),('Mao de Obra');
 """;

@@ -4,6 +4,7 @@ import 'package:cattecalf/views/screens/mains/EconomyPage.dart';
 import 'package:cattecalf/views/screens/mains/FilterPage.dart';
 import 'package:cattecalf/views/screens/mains/StartPage.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NavBar extends StatefulWidget {
   final int currentIndex;
@@ -35,6 +36,21 @@ class CustomPageRoute<T> extends MaterialPageRoute<T> {
 }
 
 class _navbarState extends State<NavBar> {
+  bool haveInternet = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkInternetConnectivity();
+  }
+
+  checkInternetConnectivity() async {
+  bool result = await InternetConnectionChecker().hasConnection;
+  setState(() {
+    haveInternet = result;
+  });
+}
+
   void _navigateToPage(int index) {
     setState(() {
       _currentIndex = index;
@@ -55,10 +71,12 @@ class _navbarState extends State<NavBar> {
         );
         break;
       case 2:
-        Navigator.pushReplacement(
-          context,
-          CustomPageRoute(builder: (context) => FilterPage()),
-        );
+        if(haveInternet){
+            Navigator.pushReplacement(
+            context,
+            CustomPageRoute(builder: (context) => FilterPage()),
+          );
+        }
         break;
     }
   }
@@ -92,10 +110,16 @@ class _navbarState extends State<NavBar> {
             icon: Icon(Icons.attach_money),
             label: "",
           ),
-          BottomNavigationBarItem(
+          haveInternet == false
+          ? BottomNavigationBarItem(
+            icon: Icon(Icons.filter_list_off, color: Colors.red,),
+            label: "",
+          )
+          : BottomNavigationBarItem(
             icon: Icon(Icons.filter_list),
             label: "",
           ),
+          
         ],
       ),
     );

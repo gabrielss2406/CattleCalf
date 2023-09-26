@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_field
+import 'package:cattecalf/constants/AppSharedPreferences.dart';
 import 'package:cattecalf/views/widgets/appBar.dart';
 import 'package:cattecalf/views/widgets/navBar.dart';
 import 'package:cattecalf/views/widgets/cardCow.dart';
@@ -27,12 +28,12 @@ class _StartPageState extends State<StartPage> {
       // TEMP CODE (Login) ================================
       AuthServices.verifyLogged().then(
         (value) {
-          print("value: "+value.toString());
           if (value) {
             print("Já logado!!");
             // Navigator
           } else {
             print("Fazendo login...");
+            AppSharedPreferences.saveUser("02126632679");
           }
         },
       );

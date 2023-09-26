@@ -48,6 +48,7 @@ dependencies:
   mysql1: ^0.20.0
   cpf_cnpj_validator: ^2.0.0
   mask_text_input_formatter: ^2.5.0
+  internet_connection_checker: ^1.0.0+1
   
   
 
