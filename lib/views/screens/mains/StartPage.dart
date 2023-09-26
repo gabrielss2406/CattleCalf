@@ -60,58 +60,6 @@ class _StartPageState extends State<StartPage> {
       ),
       body: Column(
         children: [
-          InkWell(
-            onTap: () {},
-            child: Container(
-              height: 70,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              alignment: Alignment.center,
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  textSelectionTheme: TextSelectionThemeData(
-                    selectionColor: Color.fromARGB(255, 96, 72, 72),
-                  ),
-                ),
-                child: TextField(
-                  controller: _searchController,
-                  onChanged: (value) {
-                    setState(() {
-                      _searchQuery = value;
-                    });
-                  },
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color.fromARGB(255, 96, 72, 72),
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Pesquisar',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 96, 72, 72)),
-                    ),
-                    hintStyle: TextStyle(
-                      color: Color.fromARGB(255, 120, 144, 72),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 120, 144, 72),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 96, 72, 72)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: cattleList.length,
