@@ -3,6 +3,7 @@ import 'package:cattecalf/database/services/WeightServices.dart';
 import 'package:cattecalf/models/CattleModel.dart';
 import 'package:cattecalf/views/screens/mains/InsightsCow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class NewWeight extends StatefulWidget {
@@ -145,6 +146,10 @@ Widget textEntry(controller, text) {
     margin: EdgeInsets.only(top: 5, bottom: 5),
     padding: EdgeInsets.all(5),
     child: TextField(
+      keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly,
+        ],
       controller: controller,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(5),

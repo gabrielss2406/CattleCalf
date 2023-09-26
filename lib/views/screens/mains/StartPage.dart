@@ -60,6 +60,9 @@ class _StartPageState extends State<StartPage> {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: cattleList.length,

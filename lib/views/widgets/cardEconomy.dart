@@ -89,7 +89,7 @@ class _CardTwoState extends State<CardTwo> {
                       margin: EdgeInsets.only(left: 10),
                       alignment: AlignmentDirectional.center,
                       child: Text(
-                        "RS ${widget.expense.amount}",
+                        "R\$ ${widget.expense.amount.toStringAsFixed(2)}",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,

@@ -53,7 +53,7 @@ class _CardFourState extends State<CardFour> {
             child: Text(
               widget.annotation.reminder.toUpperCase(),
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 12,
                 color: Colors.brown[800],
               ),
             ),
